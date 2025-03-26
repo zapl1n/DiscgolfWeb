@@ -1,24 +1,27 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
-const adminSchema = new mongoose.Schema(
-  {
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    password: {
-      type: String,
-      required: true,
-    },
-    isAdmin: {
-      type: Boolean,
-      default: true, // Kui kasutaja on admin
-    },
+const AdminSchema = new mongoose.Schema({
+  email: {
+    type: String,
+    required: true,
   },
-  { timestamps: true }
-); // Automaatne loomise ja uuendamise kuupäev
+  password: {
+    type: String,
+    required: true,
+  },
+});
 
-const Admin = mongoose.model("Admin", adminSchema);
+AdminSchema.pre("save", async function (next) {
+  const admin = this;
 
-module.exports = Admin;
+  if (admin.isModified("password")) {
+    const hashedPassword = await bcrypt.hash(admin.password, 10);
+    admin.password = hashedPassword;
+    next();
+  }
+});
+
+const AdminModel = mongoose.model("Admin", AdminSchema);
+
+module.exports = AdminModel;
