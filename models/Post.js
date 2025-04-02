@@ -7,44 +7,44 @@
 const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
-    name:{
-        type: String,
-        required: true,
-    },
-    location:{
-        type: String,
-        required: true,
-    },
-    imgFileName:{
-        type: String,
-        required: true,
-    },
-    email:{
-        type: String,
-        required: true,
-    },
-    phone:{
-        type: String,
-        required: true,
-    },
-    status:{
-        type: String,
-        enum:['pending', 'approved', 'rejected'],
-        default: 'pending',
-    },
-    rejectReason:{
-        type: String
-    },
-    postType:{
-        type: String,
-        enum:['lost', 'found'],
-        required: true,
-    },
-    createdAt:{
-        type: Date,
-        default: Date.now,
-    }
-})
+  name: {
+    type: String,
+    required: true,
+  },
+  location: {
+    type: String,
+    required: true,
+  },
+  imgFileName: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  phone: {
+    type: String,
+    required: true,
+  },
+  status: {
+    type: String,
+    enum: ["pending", "accepted", "rejected"],
+    default: "pending",
+  },
+  rejectReason: {
+    type: String,
+  },
+  postType: {
+    type: String,
+    enum: ["lost", "found"],
+    required: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
 
 const Post = mongoose.model("Post", PostSchema);
 module.exports = Post;
