@@ -27,7 +27,7 @@ router.post("/posts/:id/accept", authMiddleware, async (req, res) => {
 
 router.post("/posts/:id/reject", authMiddleware, async (req, res) => {
   try {
-    const postId = req.params.postId;
+    const postId = req.params.id;
     const post = await Post.findById(postId);
 
     if (!post) {
@@ -38,7 +38,7 @@ router.post("/posts/:id/reject", authMiddleware, async (req, res) => {
     post.rejectReason = req.body.rejectReason;
     await post.save();
 
-    await sendEmailToAuthor(post.email, "rejected");
+    
     res.status(200).send("Postitus on tagasi lükatud");
   } catch (error) {
     console.error("Error rejecting post:", error);
@@ -48,14 +48,14 @@ router.post("/posts/:id/reject", authMiddleware, async (req, res) => {
 
 router.delete("/posts/:id/delete", authMiddleware, async (req, res) => {
   try {
-    const postId = req.params.postId;
+    const postId = req.params.id;
     const post = await Post.findById(postId);
 
     if (!post) {
       return res.status(404).json({ message: "Post not found" });
     }
 
-    await post.remove();
+    await Post.findByIdAndDelete(postId)
     res.status(200).json({ message: "Post deleted successfully" });
   } catch (error) {
     console.error("Error deleting post:", error);
