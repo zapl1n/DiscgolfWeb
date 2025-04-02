@@ -2,8 +2,12 @@ const express = require("express");
 const dotenv = require("dotenv");
 dotenv.config();
 const connectDB = require("./config/db");
+
+
+
 const AdminLogin = require("./routes/AdminLogin");
 const AdminLogOut = require("./routes/AdminLogOut");
+const Post = require("./routes/Posts");
 
 connectDB();
 
@@ -16,6 +20,8 @@ app.get("/", (req, res) => {
 
 app.use("/admin", AdminLogin);
 app.use("/admin", AdminLogOut);
+app.use("/posts", Post);
+
 
 const PORT = process.env.PORT || 8000;
 app.listen(
