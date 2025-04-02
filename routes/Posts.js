@@ -46,4 +46,14 @@ router.get("/found", async (req, res) => {
   }
 });
 
+router.get("/", async (req, res) => {
+  try {
+    const allPosts = await Post.find();
+    res.status(200).json(allPosts);    
+  } catch (error) {
+    console.error("Error fetching all posts:", error);
+    res.status(500).json({ message: "Error fetching all posts." });
+  }
+})
+
 module.exports = router;
