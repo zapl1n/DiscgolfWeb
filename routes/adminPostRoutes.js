@@ -1,20 +1,29 @@
 const express = require("express");
 const router = express.Router();
 const Post = require("../models/Post");
-const authMiddleware = require("../middleware/authMiddleware");
+const {authMiddleware, adminMiddleware} = require("../middleware/authMiddleware");
+const sendEmail = require("../mailer");
 
-router.post("/posts/:id/accept", authMiddleware, async (req, res) => {
+router.post("/posts/:id/accept", authMiddleware, adminMiddleware, async (req, res) => {
   try {
     const postId = req.params.id;
-    console.log("Postituse ID:", postId);
     const post = await Post.findById(postId);
 
+
+    // Check if the post exists
     if (!post) {
       return res.status(404).json({ message: "Post not found" });
     }
 
+    
     post.status = "accepted";
     await post.save();
+
+    const email = post.email
+    const subject = "Post Accepted";
+    const text = 'Your post has been accepted. Thank you for your contribution!';
+
+    await sendEmail(email, subject, text);
 
   
 
@@ -25,7 +34,7 @@ router.post("/posts/:id/accept", authMiddleware, async (req, res) => {
   }
 });
 
-router.post("/posts/:id/reject", authMiddleware, async (req, res) => {
+router.post("/posts/:id/reject", authMiddleware, adminMiddleware, async (req, res) => {
   try {
     const postId = req.params.id;
     const post = await Post.findById(postId);
@@ -46,7 +55,7 @@ router.post("/posts/:id/reject", authMiddleware, async (req, res) => {
   }
 });
 
-router.delete("/posts/:id/delete", authMiddleware, async (req, res) => {
+router.delete("/posts/:id/delete", authMiddleware, adminMiddleware, async (req, res) => {
   try {
     const postId = req.params.id;
     const post = await Post.findById(postId);
@@ -60,6 +69,16 @@ router.delete("/posts/:id/delete", authMiddleware, async (req, res) => {
   } catch (error) {
     console.error("Error deleting post:", error);
     res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+router.get("/posts", authMiddleware, adminMiddleware, async (req, res) => {
+  try {
+    const allPosts = await Post.find();
+    res.status(200).json(allPosts);
+  } catch (error) {
+    console.error("Error fetching all posts:", error);
+    res.status(500).json({ message: "Error fetching all posts." });
   }
 });
 

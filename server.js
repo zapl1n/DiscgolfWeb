@@ -4,11 +4,11 @@ dotenv.config();
 const connectDB = require("./config/db");
 
 
-
 const AdminLogin = require("./routes/AdminLogin");
 const AdminLogOut = require("./routes/AdminLogOut");
 const Post = require("./routes/Posts");
 const adminPostRoutes = require("./routes/adminPostRoutes");
+
 
 connectDB();
 
@@ -23,6 +23,9 @@ app.use("/admin", AdminLogin);
 app.use("/admin", AdminLogOut);
 app.use("/posts", Post);
 app.use("/admin", adminPostRoutes);
+
+
+
 
 
 const PORT = process.env.PORT || 8000;
