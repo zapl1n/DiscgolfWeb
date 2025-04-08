@@ -1,15 +1,25 @@
 const express = require("express");
 const router = express.Router();
 const Post = require("../models/Post");
+const { upload, resizeImage } = require("../middleware/upload");
+const fs = require("fs");
+const path = require("path");
 
-router.post("/create", async (req, res) => {
+router.post("/create", upload.single("imgFile"), async (req, res) => {
   try {
     const { name, location, imgFileName, email, phone, postType } = req.body;
+
+    let imgPath = "";
+    if(req.file) {
+      const resizedImageBuffer = await resizeImage(req.file.buffer);
+      imgPath = `uploads/${Date.now()}-${req.file.originalname}`;
+      fs.writeFileSync(path.join(__dirname, "../", imgPath), resizedImageBuffer);
+    }
 
     const newPost = new Post({
       name,
       location,
-      imgFileName,
+      imgFileName: imgPath,
       email,
       phone,
       postType,
