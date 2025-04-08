@@ -44,6 +44,16 @@ const PostSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  updatedAt: {
+    type: Date,
+  },
+});
+
+PostSchema.pre("save", function (next) {
+  if (this.isModified("status")) {
+    this.updatedAt = Date.now();
+  }
+  next();
 });
 
 const Post = mongoose.model("Post", PostSchema);

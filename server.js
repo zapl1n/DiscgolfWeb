@@ -8,7 +8,7 @@ const AdminLogin = require("./routes/AdminLogin");
 const AdminLogOut = require("./routes/AdminLogOut");
 const Post = require("./routes/Posts");
 const adminPostRoutes = require("./routes/adminPostRoutes");
-
+const cleanUpOldPosts = require("./services/cleanUpOldPosts")
 
 connectDB();
 
@@ -25,7 +25,7 @@ app.use("/posts", Post);
 app.use("/admin", adminPostRoutes);
 
 
-
+cleanUpOldPosts();
 
 
 const PORT = process.env.PORT || 8000;
