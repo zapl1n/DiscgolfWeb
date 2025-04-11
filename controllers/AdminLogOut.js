@@ -1,7 +1,16 @@
+
+// Impordime redise
 const redisClient = require("../redisClient")
+
+
 
 const logoutAdmin = async (req, res) => {
   try {
+
+    // Võtame headerist tokeni
+    // Kui tokenit ei ole, siis tagastame 401 vea
+    // Kui token on olemas, siis lisame selle redisesse
+    // Token kehtib 1 tund
     const token = req.header("Authorization")?.split(" ")[1];
     if (!token) {
       return res.status(401).json({ message: "No token provided" });
