@@ -7,7 +7,7 @@ const path = require("path");
 
 router.post("/create", upload.single("imgFile"), async (req, res) => {
   try {
-    const { name, location, imgFileName, email, phone, postType } = req.body;
+    const { name, location, email, phone, postType } = req.body;
 
     let imgPath = "";
     if(req.file) {
