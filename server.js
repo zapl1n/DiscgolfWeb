@@ -6,6 +6,7 @@ const cors = require("cors");
 
 const AdminLogin = require("./routes/AdminLogin");
 const AdminLogOut = require("./routes/AdminLogOut");
+const CoursesRoutes = require("./routes/CoursesRoutes");
 const Post = require("./routes/Posts");
 const adminPostRoutes = require("./routes/adminPostRoutes");
 const cleanUpOldPosts = require("./services/cleanUpOldPosts");
@@ -17,7 +18,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: "http://localhost:5173",
-    methods: ["GET", "POST", "PUT", "DELETE"], // Sõltuvalt, milliseid päringute meetodeid kasutad
+    methods: ["GET", "POST", "PUT", "DELETE"], 
     allowedHeaders: ["Content-Type", "Authorization", "x-auth-token"],
   })
 );
@@ -31,6 +32,7 @@ app.use("/admin", AdminLogin);
 app.use("/admin", AdminLogOut);
 app.use("/posts", Post);
 app.use("/admin", adminPostRoutes);
+app.use("/", CoursesRoutes);
 
 cleanUpOldPosts();
 

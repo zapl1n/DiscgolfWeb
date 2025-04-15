@@ -9,6 +9,12 @@ router.post("/create", upload.single("imgFile"), async (req, res) => {
   try {
     const { name, location, email, phone, postType } = req.body;
 
+    const courses = await require("../models/Courses").findOne({county});
+
+    if (!courses) {
+      return res.status(400).json({ message: `Maakonda ${county} ei leitud.` });
+    }
+
     let imgPath = "";
     if(req.file) {
       const resizedImageBuffer = await resizeImage(req.file.buffer);
@@ -18,7 +24,7 @@ router.post("/create", upload.single("imgFile"), async (req, res) => {
 
     const newPost = new Post({
       name,
-      location,
+      location: courses._id,
       imgFileName: imgPath,
       email,
       phone,
@@ -65,5 +71,20 @@ router.get("/", async (req, res) => {
     res.status(500).json({ message: "Error fetching all posts." });
   }
 })
+
+router.get("/county/:countyName", async (req, res) => {
+  try {
+      const { countyName } = req.params;
+      console.log(countyName);
+      const courses = await require("../models/Courses").findOne({ county: countyName });
+      if (!courses) {
+          return res.status(404).json({ message: "County not found" });
+      }
+      res.status(200).json(courses);
+  } catch (err) {
+      res.status(500).json({ message: err.message });
+  }
+});
+
 
 module.exports = router;

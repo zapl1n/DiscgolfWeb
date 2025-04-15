@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const redisClient = require("../redisClient");
+
 
 const authMiddleware = async (req, res, next) => {
   const token = req.headers["authorization"]?.split(" ")[1]; // Eeldame, et token saadetakse autoriseerimise päises

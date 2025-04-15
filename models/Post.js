@@ -1,14 +1,10 @@
-// This is a Mongoose model for a post in a lost and found application.
-// It defines the schema for a post, including fields for the name, location,
-// image file name, email, phone number, status, rejection reason, post type, and creation date.
-// It also sets default values for the status and creation date fields.
-// The schema is then used to create a Mongoose model called "Post", which is exported for use in other parts of the application.
-// models/Post.js
+
 const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
   name: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Courses",
     required: true,
   },
   location: {
@@ -17,7 +13,7 @@ const PostSchema = new mongoose.Schema({
   },
   imgFileName: {
     type: String,
-    required: true,
+    required: false,
   },
   email: {
     type: String,
