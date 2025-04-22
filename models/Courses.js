@@ -5,8 +5,8 @@ const CourseSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  courses: {
-    type: [String],
+  course: {
+    type: String,
     required: true,
   },
 });

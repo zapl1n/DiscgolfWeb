@@ -3,18 +3,18 @@ const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
   name: {
+    type: String,
+    required: true,
+  },
+  course: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Courses",
+    ref: "Course",
     required: true,
   },
-  location: {
-    type: String,
-    required: true,
-  },
-  imgFileName: {
-    type: String,
-    required: false,
-  },
+  images: [{
+    type:mongoose.Schema.Types.ObjectId,
+    ref: "Image",
+  }],
   email: {
     type: String,
     required: true,

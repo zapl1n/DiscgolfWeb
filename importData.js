@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const courseModel = require('./models/Courses');
-const courses = require('./courses.json')
+const courses = require('./discgolf_pargid.json')
 
 dotenv.config();
 
@@ -21,18 +21,21 @@ mongoose.connect(process.env.MONGO_URI, {
 const importData = async () => {
   try {
 
-    const courseData = courses.map((course) => ({
+    for(const course of courses ){
+      await courseModel.create({
         county: course.county,
-        courses: course.courses
-    }));
-    console.log(courseData);
+        course: course.course,
+      }
+      );
+      console.log(`Course ${course.course} imported successfully`);
+    }
 
-    await courseModel.insertMany(courseData);
-    console.log('Data imported successfully');
-   
-    
+    process.exit();
+
+  
   } catch (error) {
     console.error('Error importing data:', error);
+    process.exit(1);
     
   }
 };

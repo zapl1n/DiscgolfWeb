@@ -1,35 +1,70 @@
 const express = require("express");
 const router = express.Router();
 const Post = require("../models/Post");
+const Courses = require("../models/Courses");
+const Image = require("../models/ImageSchema");
 const { upload, resizeImage } = require("../middleware/upload");
 const fs = require("fs");
 const path = require("path");
 
-router.post("/create", upload.single("imgFile"), async (req, res) => {
+router.post("/create", upload.array("imgFile",3), async (req, res) => {
   try {
-    const { name, location, email, phone, postType } = req.body;
 
-    const courses = await require("../models/Courses").findOne({county});
+    const images = []
+    console.log("Files received:", req.files);
 
-    if (!courses) {
-      return res.status(400).json({ message: `Maakonda ${county} ei leitud.` });
+    if (req.files && req.files.length > 0) {
+
+      for(const file of req.files) {
+        console.log("Processing file:", file);
+        const resizedImageBuffer = await resizeImage(file.buffer);
+        const imgPath = `uploads/${Date.now()}-${file.originalname}`;
+        fs.writeFileSync(path.join(__dirname, "../", imgPath), resizedImageBuffer);
+
+
+        const image = new Image({
+          fileName: imgPath,
+          isUploaded: true,
+      })
+      console.log("Image object:", image);
+
+      const savedImage = await image.save();
+      images.push(savedImage._id);
+    }
+  }
+
+    const { name, location, course, email, phone, postType } = req.body;
+    console.log("Adnmed:", req.body);
+
+    const countyData = await Courses.findOne({ county: location });
+    console.log('County data:', countyData);
+    if (!countyData) {
+      return res.status(404).json({ message: "County not found" });
+    }
+    const courseFound = countyData.courses.find(courseItem => courseItem.toLowerCase() === course.toLowerCase());
+    console.log('Course found:', courseFound);
+    if (!courseFound) {
+      return res.status(404).json({ message: "Course not found in the specified county" });
     }
 
-    let imgPath = "";
-    if(req.file) {
-      const resizedImageBuffer = await resizeImage(req.file.buffer);
-      imgPath = `uploads/${Date.now()}-${req.file.originalname}`;
-      fs.writeFileSync(path.join(__dirname, "../", imgPath), resizedImageBuffer);
+const courseData = await Courses.findOne({ county: location, "courses": courseFound });
+console.log('Course data:', courseData);
+    if (!courseData) {
+      return res.status(404).json({ message: "Course data not found" });
     }
+    
 
     const newPost = new Post({
       name,
-      location: courses._id,
-      imgFileName: imgPath,
+      location,
+      course: courseData._id,
+      images,
       email,
       phone,
       postType,
     });
+  
+  
 
     await newPost.save();
 

@@ -1,0 +1,808 @@
+[
+  {
+    "course": "Aegviidu discgolfi park",
+    "county": "Harjumaa"
+  },
+  {
+    "course": "Coolbet Järve discgolfipark",
+    "county": "Harjumaa"
+  },
+  {
+    "course": "Järve talu discgolfipark",
+    "county": "Harjumaa"
+  },
+  {
+    "course": "Kallaste talu discgolfipark",
+    "county": "Harjumaa"
+  },
+  {
+    "course": "Kehra discgolfi park",
+    "county": "Harjumaa"
+  },
+  {
+    "course": "Keila discgolfi park",
+    "county": "Harjumaa"
+  },
+  {
+    "course": "Kernu discgolfipark",
+    "county": "Harjumaa"
+  },
+  {
+    "course": "Kose discgolfipark",
+    "county": "Harjumaa"
+  },
+  {
+    "course": "Kurna DiscGolfPark",
+    "county": "Harjumaa"
+  },
+  {
+    "course": "Kuusalu Keskkooli Rihumäe discgolfipark",
+    "county": "Harjumaa"
+  },
+  {
+    "course": "Kõrvemaa Prodigy discgolfipark (Pro)",
+    "county": "Harjumaa"
+  },
+  {
+    "course": "Laulasmaa DiscGolfPark",
+    "county": "Harjumaa"
+  },
+  {
+    "course": "Liipa Talu discgolfipark",
+    "county": "Harjumaa"
+  },
+  {
+    "course": "Maardu discgolfipark harrastajate asetus",
+    "county": "Harjumaa"
+  },
+  {
+    "course": "Maardu discgolfipark PRO asetus",
+    "county": "Harjumaa"
+  },
+  {
+    "course": "Maarjamäe discgolfi park",
+    "county": "Harjumaa"
+  },
+  {
+    "course": "Muraste discgolfipark",
+    "county": "Harjumaa"
+  },
+  {
+    "course": "Männiku discgolfipark",
+    "county": "Harjumaa"
+  },
+  {
+    "course": "Naissaare discgolfi park",
+    "county": "Harjumaa"
+  },
+  {
+    "course": "Nordic Houses Kiiu discgolfipark",
+    "county": "Harjumaa"
+  },
+  {
+    "course": "Paldiski discgolfi park",
+    "county": "Harjumaa"
+  },
+  {
+    "course": "Paunküla discgolfi park",
+    "county": "Harjumaa"
+  },
+  {
+    "course": "Rummu discgolfipark",
+    "county": "Harjumaa"
+  },
+  {
+    "course": "Saku discgolfipark",
+    "county": "Harjumaa"
+  },
+  {
+    "course": "Sportland Kõrvemaa discgolfipark (Harrastajad)",
+    "county": "Harjumaa"
+  },
+  {
+    "course": "Turba discgolfipark",
+    "county": "Harjumaa"
+  },
+  {
+    "course": "Vasalemma discgolfipark",
+    "county": "Harjumaa"
+  },
+  {
+    "course": "Viimsi discgolfipark",
+    "county": "Harjumaa"
+  },
+    {
+      "course": "Alutaguse discgolfi park (Kuldne)",
+      "county": "Ida-Virumaa"
+    },
+    {
+      "course": "Alutaguse discgolfi park (Punane)",
+      "county": "Ida-Virumaa"
+    },
+    {
+      "course": "Alutaguse discgolfi park (Roheline)",
+      "county": "Ida-Virumaa"
+    },
+    {
+      "course": "Alutaguse discgolfi park (Sinine)",
+      "county": "Ida-Virumaa"
+    },
+    {
+      "course": "Iisaku discgolfipark (Lendorav)",
+      "county": "Ida-Virumaa"
+    },
+    {
+      "course": "Iisaku discgolfipark (Tark orav)",
+      "county": "Ida-Virumaa"
+    },
+    {
+      "course": "Keskus Suvi discgolfipark (Kirju rähn)",
+      "county": "Ida-Virumaa"
+    },
+    {
+      "course": "Kiikla discgolfipark (Libahunt)",
+      "county": "Ida-Virumaa"
+    },
+    {
+      "course": "Kiviõli Seikluskeskuse discgolfipark",
+      "county": "Ida-Virumaa"
+    },
+    {
+      "course": "Kohtla-Järve discgolfipark (Trilobiit)",
+      "county": "Ida-Virumaa"
+    },
+    {
+      "course": "Kohtla-Nõmme discgolfipark",
+      "county": "Ida-Virumaa"
+    },
+    {
+      "course": "Kuremäe discgolfi park",
+      "county": "Ida-Virumaa"
+    },
+    {
+      "course": "Mäetaguse discgolfi park",
+      "county": "Ida-Virumaa"
+    },
+    {
+      "course": "Pagari discgolfipark",
+      "county": "Ida-Virumaa"
+    },
+    {
+      "course": "Tudulinna discgolfipark",
+      "county": "Ida-Virumaa"
+    },
+  
+      {
+        "course": "Alatskivi discgolfipark",
+        "county": "Tartumaa"
+      },
+      {
+        "course": "Elva Lasketiiru discgolfi park",
+        "county": "Tartumaa"
+      },
+      {
+        "course": "Ilmatsalu discgolfipark",
+        "county": "Tartumaa"
+      },
+      {
+        "course": "Kaagvere discgolfipark",
+        "county": "Tartumaa"
+      },
+      {
+        "course": "Koosa discgolfi park",
+        "county": "Tartumaa"
+      },
+      {
+        "course": "Nõo discgolfipark",
+        "county": "Tartumaa"
+      },
+      {
+        "course": "Nõo Reaalgümnaasiumi discgolfipark",
+        "county": "Tartumaa"
+      },
+      {
+        "course": "Rannu kooli discgolfipark",
+        "county": "Tartumaa"
+      },
+      {
+        "course": "Respo discgolfipark",
+        "county": "Tartumaa"
+      },
+      {
+        "course": "Rõngu discgolfipark",
+        "county": "Tartumaa"
+      },
+      {
+        "course": "Sportland Prodigy Elva discgolfipark",
+        "county": "Tartumaa"
+      },
+      {
+        "course": "Tartu Roosi discgolfipark",
+        "county": "Tartumaa"
+      },
+      {
+        "course": "Tartu Tähtvere Dendro discgolfipark",
+        "county": "Tartumaa"
+      },
+      {
+        "course": "Terminal Oil Annikoru discgolfipark powered by DiscSport (AM asetus)",
+        "county": "Tartumaa"
+      },
+      {
+        "course": "Terminal Oil Annikoru discgolfipark powered by DiscSport (PRO asetus)",
+        "county": "Tartumaa"
+      },
+      
+        {
+          "course": "Are Mõisapargi discgolfi park",
+          "county": "Pärnumaa"
+        },
+        {
+          "course": "Audru Kooli discgolfipark",
+          "county": "Pärnumaa"
+        },
+        {
+          "course": "Häädemeeste Keskkooli discgolfipark",
+          "county": "Pärnumaa"
+        },
+        {
+          "course": "Jõulumäe discgolfipark (Kollane)",
+          "county": "Pärnumaa"
+        },
+        {
+          "course": "Jõulumäe discgolfipark (Punane)",
+          "county": "Pärnumaa"
+        },
+        {
+          "course": "Jõulumäe discgolfipark (Sinine)",
+          "county": "Pärnumaa"
+        },
+        {
+          "course": "Kihnu discgolfipark",
+          "county": "Pärnumaa"
+        },
+        {
+          "course": "Kilingi-Nõmme discgolfipark",
+          "county": "Pärnumaa"
+        },
+        {
+          "course": "Lihula Mõisamäe discgolfipark – Sinine",
+          "county": "Pärnumaa"
+        },
+        {
+          "course": "Lihula Mõisamäe discgolfipark – Valge",
+          "county": "Pärnumaa"
+        },
+        {
+          "course": "Lindi discgolfipark",
+          "county": "Pärnumaa"
+        },
+        {
+          "course": "Metsapoole discgolfi park",
+          "county": "Pärnumaa"
+        },
+        {
+          "course": "Paikuse discgolfipark",
+          "county": "Pärnumaa"
+        },
+        {
+          "course": "Pärnu Jõekääru discgolfipark",
+          "county": "Pärnumaa"
+        },
+        {
+          "course": "Pärnu Raeküla discgolfipark",
+          "county": "Pärnumaa"
+        },
+        {
+          "course": "Pärnu-Jaagupi discgolfi park",
+          "county": "Pärnumaa"
+        },
+        {
+          "course": "Rannapargi discgolfipark (Rannapargi Open 2023 layout)",
+          "county": "Pärnumaa"
+        },
+        {
+          "course": "Rannapargi discgolfipark (Rannapargi Open 2024 layout)",
+          "county": "Pärnumaa"
+        },
+        {
+          "course": "Rääma discgolfipark",
+          "county": "Pärnumaa"
+        },
+        {
+          "course": "Sauga discgolfipark",
+          "county": "Pärnumaa"
+        },
+        {
+          "course": "Sindi discgolfipark",
+          "county": "Pärnumaa"
+        },
+        {
+          "course": "Tori discgolfipark",
+          "county": "Pärnumaa"
+        },
+        {
+          "course": "Tõstamaa discgolfi park",
+          "county": "Pärnumaa"
+        },
+        {
+          "course": "Valgeranna discgolfipark",
+          "county": "Pärnumaa"
+        },
+        
+          {
+            "course": "Ebavere discgolfi park",
+            "county": "Lääne-Virumaa"
+          },
+          {
+            "course": "Kadrina discgolfipark",
+            "county": "Lääne-Virumaa"
+          },
+          {
+            "course": "Kellavere DiscGolfPark",
+            "county": "Lääne-Virumaa"
+          },
+          {
+            "course": "Kunda discgolfipark (Edasijõudnute)",
+            "county": "Lääne-Virumaa"
+          },
+          {
+            "course": "Kunda discgolfipark (Harjutus)",
+            "county": "Lääne-Virumaa"
+          },
+          {
+            "course": "Mereoja kämpingu discgolfipark",
+            "county": "Lääne-Virumaa"
+          },
+          {
+            "course": "Mõedaku puhkebaasi discgolfi park",
+            "county": "Lääne-Virumaa"
+          },
+          {
+            "course": "Pariisi puhkeküla discgolfipark",
+            "county": "Lääne-Virumaa"
+          },
+          {
+            "course": "Rakke DiscGolfPark",
+            "county": "Lääne-Virumaa"
+          },
+          {
+            "course": "Rakvere discgolfipark",
+            "county": "Lääne-Virumaa"
+          },
+          {
+            "course": "Roodevälja discgolfipark",
+            "county": "Lääne-Virumaa"
+          },
+          {
+            "course": "Simuna discgolfipark",
+            "county": "Lääne-Virumaa"
+          },
+          {
+            "course": "Sõmeru discgolfipark",
+            "county": "Lääne-Virumaa"
+          },
+          {
+            "course": "Tamsalu discgolfi park",
+            "county": "Lääne-Virumaa"
+          },
+          {
+            "course": "Tapa Männikumäe discgolfi park",
+            "county": "Lääne-Virumaa"
+          },
+          {
+            "course": "Uhtna discgolfipark",
+            "county": "Lääne-Virumaa"
+          },
+          
+            {
+              "course": "Abja-Paluoja discgolfipark",
+              "county": "Viljandimaa"
+            },
+            {
+              "course": "Holstre Paradiis discgolfipark",
+              "county": "Viljandimaa"
+            },
+            {
+              "course": "Holstre-Polli discgolfipark",
+              "county": "Viljandimaa"
+            },
+            {
+              "course": "Holstre-Polli kollane discgolfipark",
+              "county": "Viljandimaa"
+            },
+            {
+              "course": "Kalmetu kooli discgolfipark",
+              "county": "Viljandimaa"
+            },
+            {
+              "course": "Karksi-Nuia discgolfipark",
+              "county": "Viljandimaa"
+            },
+            {
+              "course": "Kolga-Jaani discgolfipark",
+              "county": "Viljandimaa"
+            },
+            {
+              "course": "Mustla discgolfipark",
+              "county": "Viljandimaa"
+            },
+            {
+              "course": "Mõisaküla discgolfipark",
+              "county": "Viljandimaa"
+            },
+            {
+              "course": "Olustvere discgolfipark",
+              "county": "Viljandimaa"
+            },
+            {
+              "course": "Saarepeedi discgolfipark",
+              "county": "Viljandimaa"
+            },
+            {
+              "course": "Suure-Jaani discgolfipark",
+              "county": "Viljandimaa"
+            },
+            {
+              "course": "Tuhalaane discgolfipark",
+              "county": "Viljandimaa"
+            },
+            {
+              "course": "Valuoja Rotary kettagolfipark",
+              "county": "Viljandimaa"
+            },
+            {
+              "course": "Viljandi Rotary discgolfipark",
+              "county": "Viljandimaa"
+            },
+            
+              {
+                "course": "Ingliste Lennurada discgolfipark",
+                "county": "Raplamaa"
+              },
+              {
+                "course": "Järta discgolfipark A-asetus",
+                "county": "Raplamaa"
+              },
+              {
+                "course": "Järta discgolfipark B-asetus",
+                "county": "Raplamaa"
+              },
+              {
+                "course": "Järvakandi discgolfipark",
+                "county": "Raplamaa"
+              },
+              {
+                "course": "Kaiu discgolfipark",
+                "county": "Raplamaa"
+              },
+              {
+                "course": "Kehtna discgolfipark",
+                "county": "Raplamaa"
+              },
+              {
+                "course": "Kohila Lallemand discgolfipark",
+                "county": "Raplamaa"
+              },
+              {
+                "course": "Märjamaa discgolfipark",
+                "county": "Raplamaa"
+              },
+              {
+                "course": "Paluküla discgolfipark",
+                "county": "Raplamaa"
+              },
+              {
+                "course": "Pirgu discgolfi park",
+                "county": "Raplamaa"
+              },
+              {
+                "course": "Rapla Vesiroosi discgolfi park",
+                "county": "Raplamaa"
+              },
+              {
+                "course": "Valgu discgolfipark",
+                "county": "Raplamaa"
+              },
+              {
+                "course": "Valtu discgolfipark",
+                "county": "Raplamaa"
+              },
+              
+                {
+                  "course": "Antsla discgolfipark",
+                  "county": "Võrumaa"
+                },
+                {
+                  "course": "Haanja discgolfipark",
+                  "county": "Võrumaa"
+                },
+                {
+                  "course": "Kaldamäe discgolfipark",
+                  "county": "Võrumaa"
+                },
+                {
+                  "course": "Kääpa discgolfipark",
+                  "county": "Võrumaa"
+                },
+                {
+                  "course": "Metsavenna discgolfipark",
+                  "county": "Võrumaa"
+                },
+                {
+                  "course": "Osula discgolfipark",
+                  "county": "Võrumaa"
+                },
+                {
+                  "course": "Piusa Ürgoru discgolfipark",
+                  "county": "Võrumaa"
+                },
+                {
+                  "course": "Uhtjärve Ürgoru Nõiariigi discgolfi park",
+                  "county": "Võrumaa"
+                },
+                {
+                  "course": "Umbsaare Marjametsa discgolfipark",
+                  "county": "Võrumaa"
+                },
+                {
+                  "course": "Vastseliina discgolfipark",
+                  "county": "Võrumaa"
+                },
+                
+                  {
+                    "course": "Abruka discgolfipark",
+                    "county": "Saaremaa"
+                  },
+                  {
+                    "course": "Karujärve discgolfipark",
+                    "county": "Saaremaa"
+                  },
+                  {
+                    "course": "Kudjape discgolfipark",
+                    "county": "Saaremaa"
+                  },
+                  {
+                    "course": "Leisi discgolfipark",
+                    "county": "Saaremaa"
+                  },
+                  {
+                    "course": "Lümanda discgolfipark",
+                    "county": "Saaremaa"
+                  },
+                  {
+                    "course": "Muhu DiscGolfPark (Liiva)",
+                    "county": "Saaremaa"
+                  },
+                  {
+                    "course": "Musumänniku discgolfipark",
+                    "county": "Saaremaa"
+                  },
+                  {
+                    "course": "Mändjala discgolfipark",
+                    "county": "Saaremaa"
+                  },
+                  {
+                    "course": "Pöide discgolfipark",
+                    "county": "Saaremaa"
+                  },
+                  {
+                    "course": "Salme discgolfipark",
+                    "county": "Saaremaa"
+                  },
+                  {
+                    "course": "Valjala discgolfipark",
+                    "county": "Saaremaa"
+                  },
+                  
+                    {
+                      "course": "Avinurme discgolfi park",
+                      "county": "Jõgevamaa"
+                    },
+                    {
+                      "course": "Jõgeva discgolfi park",
+                      "county": "Jõgevamaa"
+                    },
+                    {
+                      "course": "Kaarepere discgolfipark",
+                      "county": "Jõgevamaa"
+                    },
+                    {
+                      "course": "Pala discgolfirada",
+                      "county": "Jõgevamaa"
+                    },
+                    {
+                      "course": "Pisisaare discgolfipark",
+                      "county": "Jõgevamaa"
+                    },
+                    {
+                      "course": "Põltsamaa Kuningamäe discgolfipark",
+                      "county": "Jõgevamaa"
+                    },
+                    {
+                      "course": "Siimusti discgolfi park",
+                      "county": "Jõgevamaa"
+                    },
+                    {
+                      "course": "Tabivere discgolfi park",
+                      "county": "Jõgevamaa"
+                    },
+                    
+                      {
+                        "course": "Albu Männi discgolfipark",
+                        "county": "Järvamaa"
+                      },
+                      {
+                        "course": "Aravete discgolfipark",
+                        "county": "Järvamaa"
+                      },
+                      {
+                        "course": "Imavere discgolfipark",
+                        "county": "Järvamaa"
+                      },
+                      {
+                        "course": "Järva-Jaani discgolfipark",
+                        "county": "Järvamaa"
+                      },
+                      {
+                        "course": "Koeru Laaneotsa discgolfipark",
+                        "county": "Järvamaa"
+                      },
+                      {
+                        "course": "Koigi discgolfipark",
+                        "county": "Järvamaa"
+                      },
+                      {
+                        "course": "Metsajõe discgolfipark",
+                        "county": "Järvamaa"
+                      },
+                      {
+                        "course": "Paide Ülejõe discgolfipark",
+                        "county": "Järvamaa"
+                      },
+                      {
+                        "course": "Toosikannu discgolfipark",
+                        "county": "Järvamaa"
+                      },
+                      {
+                        "course": "Türi discgolfi park",
+                        "county": "Järvamaa"
+                      },
+                      {
+                        "course": "Valgehobusemäe discgolfi park",
+                        "county": "Järvamaa"
+                      },
+                      
+                        {
+                          "course": "Ala discgolfi park",
+                          "county": "Valgamaa"
+                        },
+                        {
+                          "course": "Hummuli discgolfipark",
+                          "county": "Valgamaa"
+                        },
+                        {
+                          "course": "Kuutsemäe discgolfi park",
+                          "county": "Valgamaa"
+                        },
+                        {
+                          "course": "Meegaste discgolfi park",
+                          "county": "Valgamaa"
+                        },
+                        {
+                          "course": "Pikasilla discgolfi park",
+                          "county": "Valgamaa"
+                        },
+                        {
+                          "course": "Sokka puhkekeskuse discgolfi park",
+                          "county": "Valgamaa"
+                        },
+                        {
+                          "course": "Tehvandi discgolfipark",
+                          "county": "Valgamaa"
+                        },
+                        {
+                          "course": "Tõrva discgolfi park",
+                          "county": "Valgamaa"
+                        },
+                        {
+                          "course": "Valga discgolfi park",
+                          "county": "Valgamaa"
+                        },
+                        {
+                          "course": "Valga Jaanikese discgolfipark",
+                          "county": "Valgamaa"
+                        },
+                        
+                          {
+                            "course": "Krootuse Orupedastiku discgolfipark",
+                            "county": "Põlvamaa"
+                          },
+                          {
+                            "course": "Mammaste discgolfipark",
+                            "county": "Põlvamaa"
+                          },
+                          {
+                            "course": "Mäeotsa discgolfipark",
+                            "county": "Põlvamaa"
+                          },
+                          {
+                            "course": "Räpina discgolfipark",
+                            "county": "Põlvamaa"
+                          },
+                          {
+                            "course": "Vastse-Kuuste discgolfipark",
+                            "county": "Põlvamaa"
+                          },
+                          {
+                            "course": "Viluste discgolfipark",
+                            "county": "Põlvamaa"
+                          },
+                          
+                            {
+                              "course": "Haapsalu discgolfipark",
+                              "county": "Läänemaa"
+                            },
+                            {
+                              "course": "Hullo discgolfipark",
+                              "county": "Läänemaa"
+                            },
+                            {
+                              "course": "Kullamaa discgolfi park",
+                              "county": "Läänemaa"
+                            },
+                            {
+                              "course": "Linnamäe discgolfipark",
+                              "county": "Läänemaa"
+                            },
+                            {
+                              "course": "Mäemõisa discgolfipark",
+                              "county": "Läänemaa"
+                            },
+                            {
+                              "course": "Nõva discgolfipark",
+                              "county": "Läänemaa"
+                            },
+                            {
+                              "course": "Palivere discgolfipark",
+                              "county": "Läänemaa"
+                            },
+                            {
+                              "course": "Roosta Puhkeküla discgolfipark",
+                              "county": "Läänemaa"
+                            },
+                            
+                              {
+                                "course": "Emmaste discgolfipark",
+                                "county": "Hiiumaa"
+                              },
+                              {
+                                "course": "Kõrgessaare Mõisapargi discgolfipark",
+                                "county": "Hiiumaa"
+                              },
+                              {
+                                "course": "Käina discgolfipark",
+                                "county": "Hiiumaa"
+                              },
+                              {
+                                "course": "Palade discgolfipark",
+                                "county": "Hiiumaa"
+                              },
+                              {
+                                "course": "Pühalepa discgolfipark (Must 26)",
+                                "county": "Hiiumaa"
+                              },
+                              {
+                                "course": "Pühalepa discgolfipark (Punane 19)",
+                                "county": "Hiiumaa"
+                              },
+                              {
+                                "course": "Pühalepa discgolfipark (Sinine 19)",
+                                "county": "Hiiumaa"
+                              },
+                              {
+                                "course": "Randmäe Sportland discgolfipark",
+                                "county": "Hiiumaa"
+                              }
+                            
+]

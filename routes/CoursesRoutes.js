@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const courses = require('../courses.json');
+const courses = require('../discgolf_pargid.json');
 
 router.get('/courses/:city', (req, res) => {
   const { city } = req.params;
