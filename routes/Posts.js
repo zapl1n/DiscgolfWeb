@@ -41,23 +41,16 @@ router.post("/create", upload.array("imgFile",3), async (req, res) => {
     if (!countyData) {
       return res.status(404).json({ message: "County not found" });
     }
-    const courseFound = countyData.courses.find(courseItem => courseItem.toLowerCase() === course.toLowerCase());
-    console.log('Course found:', courseFound);
-    if (!courseFound) {
+  
+    if (countyData.course.toLowerCase() !== course.toLowerCase()) {
       return res.status(404).json({ message: "Course not found in the specified county" });
     }
 
-const courseData = await Courses.findOne({ county: location, "courses": courseFound });
-console.log('Course data:', courseData);
-    if (!courseData) {
-      return res.status(404).json({ message: "Course data not found" });
-    }
-    
 
     const newPost = new Post({
       name,
       location,
-      course: courseData._id,
+      course: countyData._id,
       images,
       email,
       phone,

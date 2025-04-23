@@ -1,20 +1,51 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const HomePage = () => {
     const [isFormVisible, setIsFormVisible] = useState(false);
     const [formData, setFormData] = useState({
         name:'',
         location:'',
+        course:'',
         imgFileName:'',
         email:'',
         phone:'',
         postType:'lost',
     });
+
     const [image, setImage] = useState(null);
+    const [counties, setCounties] = useState([]);
+    const [courses, setCourses] = useState([]);
+
+    // Laeme maakonnad
+    useEffect(() => {
+        const fetchCounties = async () => {
+            try {
+                const res = await fetch('http://localhost:8000/counties')
+                const data = await res.json();
+                setCounties(data);
+            } catch (error) {
+                console.error('Error fetching counties:', error);
+            }
+        };
+        fetchCounties();
+    }, []);
+
+    // Laeme kursused maakonna järgi
+    useEffect(() => {
+        const fetchCourses = async () => {
+            try {
+                const res = await fetch(`http://localhost:8000/course?county=${formData.county}`);
+                const data = await res.json();
+                setCourses(data);
+            } catch (error) {
+                console.error('Error fetching courses:', error);
+            }
+        };
+       fetchCourses();
+    }, [formData.county]);
 
     // Funktsioon vormi kuvamiseks 
-
     const handleShowForm = () => {
         setIsFormVisible(true);
     };
@@ -59,7 +90,8 @@ const HomePage = () => {
 
         const form = new FormData();
         form.append('name', formData.name);
-        form.append('location', formData.location);
+        form.append('location', formData.county);
+        form.append('course', formData.course);
         form.append('email', formData.email);
         form.append('phone', formData.phone);
         form.append('postType', formData.postType);
@@ -111,13 +143,25 @@ const HomePage = () => {
                         </div>
                         <div>
                             <label>Asukoht:</label>
-                            <input
-                                type="text"
-                                name="location"
-                                value={formData.location}
-                                onChange={handleInputChange}
-                                required
-                            />
+                            <select name="county" value={formData.county} onChange={handleInputChange} required>
+                            <option value=''>Vali maakond</option>
+                            {counties.map((county) => (
+                                <option key={county} value={county}>
+                                    {county}
+                                </option>
+                            ))}
+                            </select>
+                        </div>
+                        <div>
+                        <label>Rada:</label>
+                            <select name="course" value={formData.course} onChange={handleInputChange} required>
+                            <option value=''>Vali Rada</option>
+                            {courses.map((course) => (
+                                <option key={course} value={course}>
+                                    {course}
+                                </option>
+                            ))}
+                            </select>
                         </div>
                         <div>
                             <label>Pildi üleslaadimine:</label>
