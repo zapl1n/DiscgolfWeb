@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
 
-
 const authMiddleware = async (req, res, next) => {
   const token = req.headers["authorization"]?.split(" ")[1]; // Eeldame, et token saadetakse autoriseerimise päises
 
@@ -9,11 +8,6 @@ const authMiddleware = async (req, res, next) => {
   }
 
   try {
-    const isTokenBlacklisted = await redisClient.get(`blacklist:${token}`);
-    if (isTokenBlacklisted) {
-      return res.status(401).json({ message: "Unauthorized" });
-    }
-
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded;
     console.log("req.user:", req.user);

@@ -11,7 +11,7 @@ exports.loginAdmin = async (req, res) => {
 
     //Võtame andmed body-st
     const { email, password } = req.body;
-
+  
     //Otsime admin konto andmebaasist
     const admin = await Admin.findOne({ email });
 

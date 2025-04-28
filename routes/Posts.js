@@ -58,7 +58,6 @@ router.post("/create", upload.array("imgFile",3), async (req, res) => {
     });
   
   
-
     await newPost.save();
 
     res.status(201).json({
@@ -92,7 +91,7 @@ router.get("/found", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const allPosts = await Post.find();
+    const allPosts = await Post.find({status:"accepted"});
     res.status(200).json(allPosts);    
   } catch (error) {
     console.error("Error fetching all posts:", error);
