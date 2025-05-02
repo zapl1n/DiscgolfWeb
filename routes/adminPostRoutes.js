@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Post = require("../models/Post");
 const {authMiddleware, adminMiddleware} = require("../middleware/authMiddleware");
+
 const notifyClient = require("../services/emailHelper");
 
 
@@ -9,7 +10,7 @@ const notifyClient = require("../services/emailHelper");
 
 router.get("/posts", authMiddleware, adminMiddleware, async (req, res) => {
   try {
-    const allPosts = await Post.find();
+    const allPosts = await Post.find().populate('images');
     res.status(200).json(allPosts);
   } catch (error) {
     console.error("Error fetching all posts:", error);

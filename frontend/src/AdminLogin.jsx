@@ -1,19 +1,19 @@
 
 import { useState, useEffect } from 'react'
-
-
-
+import { useNavigate } from 'react-router-dom'
 
 const AdminLogin = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const navigate = useNavigate()
 
     useEffect(() => {
         const token = localStorage.getItem('token')
         if (token) {
             setIsLoggedIn(true)
+            navigate('/admin')
         }
     }, [])
 
@@ -39,8 +39,9 @@ const AdminLogin = () => {
             localStorage.setItem('token', data.token)
             setIsLoggedIn(true)
 
-           
+            navigate('/admin')
 
+        
         } catch (error) {
             setError(error.message)
             console.error('Error logging in:', error)

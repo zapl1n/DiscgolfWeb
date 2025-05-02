@@ -1,5 +1,7 @@
 
 import { useEffect, useState } from 'react';
+import { Box, Card, CardContent, Typography, TextField, Button, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 const HomePage = () => {
     const [isFormVisible, setIsFormVisible] = useState(false);
@@ -99,6 +101,8 @@ const HomePage = () => {
             form.append('imgFile', image);
         }
 
+        console.log('Form data:', form);
+
 
         try {
             const response = await fetch('http://localhost:8000/posts/create', {
@@ -123,93 +127,164 @@ const HomePage = () => {
     };
 
     return (
-        <div>
-            <h1>Tere tulemast!</h1>
-            <button onClick={handleShowForm}>Lisa uus postitus</button>
-            {confirmation && <p style={{color:'green',marginTop: '1rem'}}>{confirmation}</p>}
-            {isFormVisible && (
-                <div>
-                    <h2>Lisa uus postitus</h2>
-                    <form onSubmit={handleSubmit}>
-                        <div>
-                            <label>Nimi:</label>
-                            <input
-                                type="text"
-                                name="name"
-                                value={formData.name}
-                                onChange={handleInputChange}
-                                required
-                            />
-                        </div>
-                        <div>
-                            <label>Asukoht:</label>
-                            <select name="county" value={formData.county} onChange={handleInputChange} required>
-                            <option value=''>Vali maakond</option>
-                            {counties.map((county) => (
-                                <option key={county} value={county}>
-                                    {county}
-                                </option>
-                            ))}
-                            </select>
-                        </div>
-                        <div>
-                        <label>Rada:</label>
-                            <select name="course" value={formData.course} onChange={handleInputChange} required>
-                            <option value=''>Vali Rada</option>
-                            {courses.map((course) => (
-                                <option key={course} value={course}>
-                                    {course}
-                                </option>
-                            ))}
-                            </select>
-                        </div>
-                        <div>
-                            <label>Pildi üleslaadimine:</label>
-                            <input
-                                type="file"
-                                accept="image/*"
-                                onChange={handleImageUpload}
-                            />
-                        </div>
-                        <div>
-                            <label>Email:</label>
-                            <input
-                                type="email"
-                                name="email"
-                                value={formData.email}
-                                onChange={handleInputChange}
-                                required
-                            />
-                        </div>
-                        <div>
-                            <label>Telefon:</label>
-                            <input
-                                type="tel"
-                                name="phone"
-                                value={formData.phone}
-                                onChange={handleInputChange}
-                            />
-                        </div>
-                        <div>
-                            <label>Postituse tüüp:</label>
-                            <select
-                                name="postType"
-                                value={formData.postType}
-                                onChange={handleInputChange}
-                            >
-                                <option value="lost">Kadunud</option>
-                                <option value="found">Leitud</option>
-                            </select>
-                        </div>
-                        <button type="submit">Saada</button>
-                    </form>
-                    <button onClick={handleHideForm}>Sulge</button>
-                </div>
+        <>
+       
+        <Box display="flex" justifyContent="center" alignItems="center" sx={{ minHeight: '100vh', backgroundColor: 'transparent' }}>
+            <Box>
+                {!isFormVisible && (
+                    <Button 
+                    variant="contained"
+                     color="primary"
+                      onClick={handleShowForm}
+                      startIcon={<AddCircleIcon />}
+                      sx={{
+                        fontSize: '1.5rem',
+                        padding: '15px 30px',
+                        borderRadius: '12px',
+                        backgroundColor: '#535bf2',
+                        '&:hover': {
+                            backgroundColor: '#4242d4',
+                        },
+                      }}>
+                        Lisa uus postitus
+                    </Button>
+                )}
+                {isFormVisible && (
+           
+        <Card sx={{ width: '100%', maxWidth: 600, bgcolor: '#1e1e1e', color: '#aaa', p: 3 }}>
+          <CardContent>
+            <Typography variant="h4" gutterBottom>
+              Lisa uus postitus
+            </Typography>
+      
+            {confirmation && <Typography sx={{ color: 'green', mt: 2 }}>{confirmation}</Typography>}
+      
+            <form onSubmit={handleSubmit}>
+              <TextField
+                fullWidth
+                label="Ketta nimi"
+                name="name"
+                value={formData.name}
+                onChange={handleInputChange}
+                margin="normal"
+                required
+                sx={{ color: '#aaa' }}
+              />
+      
+              <FormControl fullWidth margin="normal" required>
+                <InputLabel sx={{ color: '#aaa' }}>Maakond</InputLabel>
+                <Select
+                  name="county"
+                  value={formData.county || ''}
+                  onChange={handleInputChange}
+                  label="Maakond"
+                  sx={{ color: '#aaa' }}
+                >
+                  <MenuItem disabled value="">Vali maakond</MenuItem>
+                  {counties.map((county) => (
+                    <MenuItem key={county} value={county}>
+                      {county}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+      
+              <FormControl fullWidth margin="normal" required>
+                <InputLabel sx={{ color: '#aaa' }}>Rada</InputLabel>
+                <Select
+                  name="course"
+                  value={formData.course}
+                  onChange={handleInputChange}
+                  label="Rada"
+                  sx={{ color: '#aaa' }}
+                >
+                  <MenuItem value="">Vali rada</MenuItem>
+                  {courses.map((course) => (
+                    <MenuItem key={course} value={course}>
+                      {course}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+      
+              <FormControl fullWidth margin="normal">
+  <InputLabel shrink sx={{ color: '#aaa' }}>
+    Lae pilt
+  </InputLabel>
+  <input
+    type="file"
+    accept="image/*"
+    onChange={handleImageUpload}
+    style={{
+      color: '#aaa',
+      backgroundColor: '#2c2c2c',
+      padding: '10px',
+      borderRadius: '4px',
+    }}
+  />
+</FormControl>
 
-            )}
-
-            </div>
-        );
+      
+              <TextField
+                fullWidth
+                label="Email"
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                margin="normal"
+                required
+                sx={{ 
+                    input: { color: '#aaa' },
+                    label: { color: '#aaa' } 
+                }}
+              />
+      
+              <TextField
+              
+                fullWidth
+                label="Telefon"
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleInputChange}
+                margin="normal"
+                sx={{ 
+                    input: { color: '#aaa' },
+                    label: { color: '#aaa' } 
+                }}
+              />
+      
+              <FormControl fullWidth margin="normal">
+                <InputLabel sx={{ color: '#7351FA' }}>Postituse tüüp</InputLabel>
+                <Select
+                  name="postType"
+                  value={formData.postType}
+                  onChange={handleInputChange}
+                  label="Postituse tüüp"
+                  sx={{ color: '#aaa' }}
+                >
+                  <MenuItem value="lost">Kadunud</MenuItem>
+                  <MenuItem value="found">Leitud</MenuItem>
+                </Select>
+              </FormControl>
+      
+              <Box mt={3} display="flex" justifyContent="space-between">
+                <Button type="submit" variant="contained" color="primary">
+                  Saada
+                </Button>
+                <Button onClick={handleHideForm} variant="outlined" color="secondary">
+                  Sulge
+                </Button>
+              </Box>
+            </form>
+          </CardContent>
+        </Card>
+        )}
+      </Box>
+      </Box>
+      </>
+    );
 }
 
       

@@ -3,6 +3,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import AdminLogin from './AdminLogin'
 import HomePage from './HomePage'
+import AdminDashboard from '../AdminDashboard/AdminDashboard'
+import Navbar from './Navbar'
+import AllPosts from './Allposts'
+
 
 function App() {
  
@@ -10,10 +14,15 @@ function App() {
   
     return (
       <Router>
+      <>
+      <Navbar />
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/admin" element={<AdminLogin />} />
+          <Route exact path="/" element={<HomePage />} />
+          <Route path="/postitused" element={<AllPosts />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin" element={<AdminDashboard />}/>
         </Routes>
+      </>
       </Router>
     )
   }

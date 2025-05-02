@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 const connectDB = require("./config/db");
 const cors = require("cors");
+const path = require("path");
 
 const AdminLogin = require("./routes/AdminLogin");
 const AdminLogOut = require("./routes/AdminLogOut");
@@ -13,8 +14,10 @@ const cleanUpOldPosts = require("./services/cleanUpOldPosts");
 
 connectDB();
 
+
 const app = express();
 app.use(express.json());
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(
   cors({
     origin: "http://localhost:5173",
@@ -22,7 +25,8 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization", "x-auth-token"],
   })
 );
-app.options('*', cors());
+
+
 
 app.get("/", (req, res) => {
   res.send("API is running...");
