@@ -8,19 +8,18 @@ const fs = require("fs");
 const path = require("path");
 
 router.post("/create", upload.array("imgFile",3), async (req, res) => {
+  console.log("Received a POST request at /create");
   try {
 
     const images = []
     console.log("Files received:", req.files);
 
     if (req.files && req.files.length > 0) {
-
       for(const file of req.files) {
         console.log("Processing file:", file);
         const resizedImageBuffer = await resizeImage(file.buffer);
         const imgPath = `uploads/${Date.now()}-${file.originalname}`;
         fs.writeFileSync(path.join(__dirname, "../", imgPath), resizedImageBuffer);
-
 
         const image = new Image({
           fileName: imgPath,
@@ -36,7 +35,7 @@ router.post("/create", upload.array("imgFile",3), async (req, res) => {
     const { name, location, course, email, phone, postType } = req.body;
     console.log("Adnmed:", req.body);
 
-    const countyData = await Courses.findOne({ county: location });
+    const countyData = await Courses.findOne({ county: location, course: course });
     console.log('County data:', countyData);
     if (!countyData) {
       return res.status(404).json({ message: "County not found" });
@@ -49,7 +48,7 @@ router.post("/create", upload.array("imgFile",3), async (req, res) => {
 
     const newPost = new Post({
       name,
-      location,
+      location: countyData._id,
       course: countyData._id,
       images,
       email,
@@ -59,6 +58,7 @@ router.post("/create", upload.array("imgFile",3), async (req, res) => {
   
   
     await newPost.save();
+    
 
     res.status(201).json({
       message: "Post created successfully",
@@ -71,6 +71,7 @@ router.post("/create", upload.array("imgFile",3), async (req, res) => {
 });
 
 router.get("/lost", async (req, res) => {
+  res.send('Test endpoint working!');
   try {
     const lostPosts = await Post.find({ postType: "lost" });
     res.status(200).json(lostPosts);
@@ -92,6 +93,7 @@ router.get("/found", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const allPosts = await Post.find({status:"accepted"});
+    
     res.status(200).json(allPosts);    
   } catch (error) {
     console.error("Error fetching all posts:", error);
@@ -111,6 +113,10 @@ router.get("/county/:countyName", async (req, res) => {
   } catch (err) {
       res.status(500).json({ message: err.message });
   }
+});
+
+router.get("/test", (req, res) => {
+  res.send("Test töötab!");
 });
 
 

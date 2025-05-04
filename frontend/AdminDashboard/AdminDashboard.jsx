@@ -69,6 +69,9 @@ const AdminDashboard = () => {
                 >
                     <h3>{post.name}</h3>
                     <p><strong>Created:</strong> {new Date(post.createdAt).toLocaleString()}</p>
+                    <p><strong>Location:</strong> {post.location ? post.location.county : 'Not available'}</p>
+<p><strong>Course:</strong> {post.course ? post.course.course : 'Not available'}</p>
+
                     <p><strong>Email:</strong> {post.email}</p>
                     <p><strong>Phone:</strong> {post.phone}</p>
                     <p><strong>Post Type:</strong> {post.postType}</p>

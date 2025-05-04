@@ -102,17 +102,23 @@ const HomePage = () => {
         if (image) {
             form.append('imgFile', image);
         }
-
-        console.log('Form data:', form);
+        console.log("Form data before sending:");
         for (const [key, value] of form.entries()) {
             console.log(`${key}: ${value}`);
         }
 
+        if(!formData.name || !formData.county || !formData.course || !formData.email || !formData.phone) {
+          console.log("Please fill all the required fields");
+          return;
+        }
+        console.log("Sending data to: http://localhost:8000/posts/create");
+
         try {
-            const response = await fetch('http://localhost:8000/posts/create', {
-                method: 'POST',
-                body: form,
+            const response = await fetch('http://localhost:8000/posts/create',  {
+              method: 'POST',
+              body: form,
             });
+            console.log("Post response:", response);
 
             if (!response.ok) {
                 throw new Error('Network response was not ok');

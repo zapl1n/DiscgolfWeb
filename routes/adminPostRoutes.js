@@ -10,7 +10,13 @@ const notifyClient = require("../services/emailHelper");
 
 router.get("/posts", authMiddleware, adminMiddleware, async (req, res) => {
   try {
-    const allPosts = await Post.find().populate('images');
+    const allPosts = await Post.find()
+    .populate('images')
+    .populate('course')
+    .populate('location')
+    
+    console.log("All posts:", allPosts); // Logige kõik postitused
+    
     res.status(200).json(allPosts);
   } catch (error) {
     console.error("Error fetching all posts:", error);
