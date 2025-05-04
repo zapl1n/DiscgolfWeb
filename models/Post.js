@@ -18,6 +18,10 @@ const PostSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
+    match: [
+      /^[^\s@]+@[^\s@]+\.(ee|com|org|net)$/,
+      'Lubatud on ainult .ee, .com, .org ja .net e-mailid',
+    ],
   },
   phone: {
     type: String,

@@ -8,13 +8,17 @@ import Navbar from './Navbar'
 import AllPosts from './Allposts'
 
 
+
+
 function App() {
  
 
   
     return (
       <Router>
+     
       <>
+
       <Navbar />
         <Routes>
           <Route exact path="/" element={<HomePage />} />

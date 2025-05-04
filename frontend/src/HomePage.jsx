@@ -1,29 +1,32 @@
-
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Box, Card, CardContent, Typography, TextField, Button, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 const HomePage = () => {
     const [isFormVisible, setIsFormVisible] = useState(false);
     const [formData, setFormData] = useState({
-        name:'',
-        location:'',
-        course:'',
-        imgFileName:'',
-        email:'',
-        phone:'',
-        postType:'lost',
+        name: '',
+        location: '',
+        course: '',
+        imgFileName: '',
+        email: '',
+        phone: '',
+        postType: 'lost',
     });
 
     const [image, setImage] = useState(null);
     const [counties, setCounties] = useState([]);
     const [courses, setCourses] = useState([]);
 
+    // Formi ref määramine
+    const formRef = useRef(null);
+
     // Laeme maakonnad
     useEffect(() => {
         const fetchCounties = async () => {
             try {
-                const res = await fetch('http://localhost:8000/counties')
+                const res = await fetch('http://localhost:8000/counties');
                 const data = await res.json();
                 setCounties(data);
             } catch (error) {
@@ -44,7 +47,7 @@ const HomePage = () => {
                 console.error('Error fetching courses:', error);
             }
         };
-       fetchCourses();
+        fetchCourses();
     }, [formData.county]);
 
     // Funktsioon vormi kuvamiseks 
@@ -56,12 +59,12 @@ const HomePage = () => {
     const handleHideForm = () => {
         setIsFormVisible(false);
         setFormData({
-            name:'',
-            location:'',
-            imgFileName:'',
-            email:'',
-            phone:'',
-            postType:'lost',
+            name: '',
+            location: '',
+            imgFileName: '',
+            email: '',
+            phone: '',
+            postType: 'lost',
         });
         setImage(null);
     };
@@ -79,7 +82,6 @@ const HomePage = () => {
     const handleImageUpload = (e) => {
         const file = e.target.files[0];
         if (file) {
-            //
             setImage(file);
         }
     };
@@ -102,7 +104,9 @@ const HomePage = () => {
         }
 
         console.log('Form data:', form);
-
+        for (const [key, value] of form.entries()) {
+            console.log(`${key}: ${value}`);
+        }
 
         try {
             const response = await fetch('http://localhost:8000/posts/create', {
@@ -119,178 +123,223 @@ const HomePage = () => {
             setConfirmation('Postitus on edukalt loodud!');
             setTimeout(() => {
                 setConfirmation('');
-            }, 3000); 
+            }, 3000);
             handleHideForm();
         } catch (error) {
             console.error('Error creating post:', error);
         }
     };
 
+    // Kui vorm muutub nähtavaks, kerime selle juurde
+    useEffect(() => {
+        if (isFormVisible && formRef.current) {
+            formRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }, [isFormVisible]);
+
     return (
         <>
-       
-        <Box display="flex" justifyContent="center" alignItems="center" sx={{ minHeight: '100vh', backgroundColor: 'transparent' }}>
-            <Box>
-                {!isFormVisible && (
-                    <Button 
-                    variant="contained"
-                     color="primary"
-                      onClick={handleShowForm}
-                      startIcon={<AddCircleIcon />}
-                      sx={{
-                        fontSize: '1.5rem',
-                        padding: '15px 30px',
-                        borderRadius: '12px',
-                        backgroundColor: '#535bf2',
-                        '&:hover': {
-                            backgroundColor: '#4242d4',
-                        },
-                      }}>
-                        Lisa uus postitus
-                    </Button>
-                )}
-                {isFormVisible && (
-           
-        <Card sx={{ width: '100%', maxWidth: 600, bgcolor: '#1e1e1e', color: '#aaa', p: 3 }}>
-          <CardContent>
-            <Typography variant="h4" gutterBottom>
-              Lisa uus postitus
-            </Typography>
-      
-            {confirmation && <Typography sx={{ color: 'green', mt: 2 }}>{confirmation}</Typography>}
-      
-            <form onSubmit={handleSubmit}>
-              <TextField
-                fullWidth
-                label="Ketta nimi"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                margin="normal"
-                required
-                sx={{ color: '#aaa' }}
-              />
-      
-              <FormControl fullWidth margin="normal" required>
-                <InputLabel sx={{ color: '#aaa' }}>Maakond</InputLabel>
-                <Select
-                  name="county"
-                  value={formData.county || ''}
-                  onChange={handleInputChange}
-                  label="Maakond"
-                  sx={{ color: '#aaa' }}
-                >
-                  <MenuItem disabled value="">Vali maakond</MenuItem>
-                  {counties.map((county) => (
-                    <MenuItem key={county} value={county}>
-                      {county}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-      
-              <FormControl fullWidth margin="normal" required>
-                <InputLabel sx={{ color: '#aaa' }}>Rada</InputLabel>
-                <Select
-                  name="course"
-                  value={formData.course}
-                  onChange={handleInputChange}
-                  label="Rada"
-                  sx={{ color: '#aaa' }}
-                >
-                  <MenuItem value="">Vali rada</MenuItem>
-                  {courses.map((course) => (
-                    <MenuItem key={course} value={course}>
-                      {course}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-      
-              <FormControl fullWidth margin="normal">
-  <InputLabel shrink sx={{ color: '#aaa' }}>
-    Lae pilt
-  </InputLabel>
-  <input
-    type="file"
-    accept="image/*"
-    onChange={handleImageUpload}
-    style={{
-      color: '#aaa',
-      backgroundColor: '#2c2c2c',
-      padding: '10px',
-      borderRadius: '4px',
-    }}
-  />
-</FormControl>
+            <Box sx={{
+                textAlign: 'center',
+                py: 8,
+                color: 'white',
+            }}>
+                <Typography variant="h1" sx={{
+                    fontSize: '4rem',
+                    fontWeight: 'bold',
+                    background: 'linear-gradient(to right, #592cc4,rgb(132, 90, 249))',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    marginTop: '10rem',
+                    mb: 2,
+                }}>
+                    Kadunud või leitud discgolfi ketas?
+                </Typography>
+                <Typography variant="h5" sx={{ maxWidth: '600px', margin: '0 auto' }}>
+                    Lisa teade kadunud või leitud kettast ning aita kogukonnal kettad üles leida!
+                </Typography>
 
-      
-              <TextField
-                fullWidth
-                label="Email"
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                margin="normal"
-                required
-                sx={{ 
-                    input: { color: '#aaa' },
-                    label: { color: '#aaa' } 
-                }}
-              />
-      
-              <TextField
-              
-                fullWidth
-                label="Telefon"
-                type="tel"
-                name="phone"
-                value={formData.phone}
-                onChange={handleInputChange}
-                margin="normal"
-                sx={{ 
-                    input: { color: '#aaa' },
-                    label: { color: '#aaa' } 
-                }}
-              />
-      
-              <FormControl fullWidth margin="normal">
-                <InputLabel sx={{ color: '#7351FA' }}>Postituse tüüp</InputLabel>
-                <Select
-                  name="postType"
-                  value={formData.postType}
-                  onChange={handleInputChange}
-                  label="Postituse tüüp"
-                  sx={{ color: '#aaa' }}
-                >
-                  <MenuItem value="lost">Kadunud</MenuItem>
-                  <MenuItem value="found">Leitud</MenuItem>
-                </Select>
-              </FormControl>
-      
-              <Box mt={3} display="flex" justifyContent="space-between">
-                <Button type="submit" variant="contained" color="primary">
-                  Saada
-                </Button>
-                <Button onClick={handleHideForm} variant="outlined" color="secondary">
-                  Sulge
-                </Button>
-              </Box>
-            </form>
-          </CardContent>
-        </Card>
-        )}
-      </Box>
-      </Box>
-      </>
+                <Box display="flex" justifyContent="center" alignItems="center" sx={{ pt: 4, backgroundColor: 'transparent' }}>
+                    <Box>
+                        {!isFormVisible && (
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={handleShowForm}
+                                startIcon={<AddCircleIcon />}
+                                sx={{
+                                    fontSize: '1.2rem',
+                                    padding: '15px 30px',
+                                    borderRadius: '12px',
+                                    background: 'linear-gradient(to right, #6a71f2,rgb(107, 63, 228))',
+                                    color: '#fff',
+                                    textTransform: 'none',
+                                    '&:hover': {
+                                        background: 'linear-gradient(to right,rgb(104, 42, 197),rgb(104, 42, 197))',
+                                    },
+                                }}>
+                                Lisa uus postitus
+                            </Button>
+                        )}
+                        {isFormVisible && (
+                            <Card ref={formRef} sx={{ width: '100%', maxWidth: 500, bgcolor: '#1e1e1e', color: '#6a71f2', p: 3, borderRadius: '12px' }}>
+                                <CardContent>
+                                    <Typography variant="h4" gutterBottom>
+                                        Lisa uus postitus
+                                    </Typography>
+
+                                    {confirmation && <Typography sx={{ color: 'green', mt: 2 }}>{confirmation}</Typography>}
+
+                                    <form onSubmit={handleSubmit}>
+                                        <TextField
+                                            fullWidth
+                                            label="Ketta nimi"
+                                            name="name"
+                                            value={formData.name}
+                                            onChange={handleInputChange}
+                                            margin="normal"
+                                            sx={{
+                                                '& .MuiInputLabel-root': {
+                                                    color: '#aaa',
+                                                },
+                                                '& .MuiInputBase-input': {
+                                                    color: '#aaa',
+                                                    fontSize: '1.1rem',
+                                                },
+                                            }}
+                                            required
+                                        />
+
+                                        <FormControl fullWidth margin="normal" required>
+                                            <InputLabel sx={{ color: '#aaa' }}>Maakond</InputLabel>
+                                            <Select
+                                                name="county"
+                                                value={formData.county || ''}
+                                                onChange={handleInputChange}
+                                                label="Maakond"
+                                                sx={{ color: '#aaa' }}
+                                            >
+                                                <MenuItem disabled value="">Vali maakond</MenuItem>
+                                                {counties.map((county) => (
+                                                    <MenuItem key={county} value={county}>
+                                                        {county}
+                                                    </MenuItem>
+                                                ))}
+                                            </Select>
+                                        </FormControl>
+
+                                        <FormControl fullWidth margin="normal" required>
+                                            <InputLabel sx={{ color: '#aaa' }}>Rada</InputLabel>
+                                            <Select
+                                                name="course"
+                                                value={formData.course}
+                                                onChange={handleInputChange}
+                                                label="Rada"
+                                                sx={{ color: '#aaa' }}
+                                            >
+                                                <MenuItem value="">Vali rada</MenuItem>
+                                                {courses.map((course) => (
+                                                    <MenuItem key={course} value={course}>
+                                                        {course}
+                                                    </MenuItem>
+                                                ))}
+                                            </Select>
+                                        </FormControl>
+
+                                        <FormControl fullWidth margin="normal">
+                                            <Box>
+                                                <input
+                                                    type="file"
+                                                    accept="image/*"
+                                                    onChange={handleImageUpload}
+                                                    id="upload-file"
+                                                    style={{ display: 'none' }}
+                                                />
+                                                <label htmlFor="upload-file">
+                                                    <Button
+                                                        variant="contained"
+                                                        color="primary"
+                                                        component="span"
+                                                        startIcon={<CloudUploadIcon />}
+                                                        sx={{
+                                                            backgroundColor: '#535bf2',
+                                                            '&:hover': {
+                                                                backgroundColor: '#6a71f2',
+                                                            },
+                                                        }}
+                                                    >
+                                                        Lae pilt
+                                                    </Button>
+                                                </label>
+                                            </Box>
+                                        </FormControl>
+
+                                        <TextField
+                                            fullWidth
+                                            label="Email"
+                                            type="email"
+                                            name="email"
+                                            value={formData.email}
+                                            onChange={handleInputChange}
+                                            margin="normal"
+                                            required
+                                            sx={{ input: { color: '#aaa' }, label: { color: '#aaa' } }}
+                                        />
+
+                                        <TextField
+                                            fullWidth
+                                            label="Telefon"
+                                            type="tel"
+                                            name="phone"
+                                            value={formData.phone}
+                                            onChange={handleInputChange}
+                                            margin="normal"
+                                            required
+                                            sx={{ input: { color: '#aaa' }, label: { color: '#aaa' } }}
+                                        />
+
+                                        <FormControl fullWidth margin="normal">
+                                            <InputLabel sx={{ color: '#7351FA' }}>Postituse tüüp</InputLabel>
+                                            <Select
+                                                name="postType"
+                                                value={formData.postType}
+                                                onChange={handleInputChange}
+                                                label="Postituse tüüp"
+                                                sx={{ color: '#aaa' }}
+                                            >
+                                                <MenuItem value="lost">Kadunud</MenuItem>
+                                                <MenuItem value="found">Leitud</MenuItem>
+                                            </Select>
+                                        </FormControl>
+
+                                        <Box mt={3} display="flex" justifyContent="space-between" gap={2}>
+                                            <Button type="submit" variant="contained" color="#fff" sx={{
+                                                flex: 1,
+                                                backgroundColor: '#535bf2',
+                                                '&:hover': {
+                                                    backgroundColor: '#6a71f2',
+                                                },
+                                                color: '#fff',
+                                            }}>
+                                                Saada
+                                            </Button>
+                                            <Button onClick={handleHideForm} variant="outlined" color="secondary" sx={{
+                                                flex: 1,
+                                                borderColor: '#535bf2',
+                                                color: '#535bf2',
+                                            }}>
+                                                Sulge
+                                            </Button>
+                                        </Box>
+                                    </form>
+                                </CardContent>
+                            </Card>
+                        )}
+                    </Box>
+                </Box>
+            </Box>
+        </>
     );
-}
+};
 
-      
-
-        
-
-            export default HomePage;
-
-           
+export default HomePage;

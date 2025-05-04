@@ -11,12 +11,12 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="static" elevation={0} sx={{ backgroundColor: '#242424' }}>
+    <AppBar position="static" elevation={0} sx={{ backgroundColor: 'transparent' }}>
       {/* Toolbar - pealkiri ja nupud */}
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
         {/* Vasak pool - pealkiri */}
         <Typography variant="h6" component="div">
-          Minu Veebirakendus
+          Siia läheb kunagi logo
         </Typography>
 
         {/* Parem pool - nupud */}
