@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Box, Paper, Typography, TextField, Button, Alert, Stack } from '@mui/material'
 
 const AdminLogin = () => {
     const [email, setEmail] = useState('')
@@ -54,45 +55,68 @@ const AdminLogin = () => {
     }
 
   return (
-    <div >
-        {isLoggedIn ? (
-            <div >
-                <h2>Welcome, Admin!</h2>
-                <button  onClick={handleLogout}>Logout</button>
-            </div>
-        ) : (
-            <div  >
-                <h2>Admin Login</h2>
-                <form onSubmit={handleLogin}>
-                    <div>
-                        <label>Email:</label>
-                        <input
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-            </div>
-            <div>
-                <label>Password:</label>
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-            </div>
-            
-            <button type="submit">Login</button>
-        </form>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        </div>
-       
-        )}
-       
-      
-    </div>
-  )
-}
+    <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            height="100vh"
+            bgcolor="transparent"
+        >
+            <Paper elevation={3} sx={{ padding: 4, width: '100%', maxWidth: 400, }    }>
+                {isLoggedIn ? (
+                    <Stack spacing={2} alignItems="center">
+                        <Typography variant="h5">Welcome, Admin!</Typography>
+                        <Button
+                            variant="contained"
+                            color="secondary"
+                            onClick={handleLogout}
+                        >
+                            Logout
+                        </Button>
+                    </Stack>
+                ) : (
+                    <>
+                        <Typography variant="h5" gutterBottom align="center">
+                            Admin Login
+                        </Typography>
+                        <form onSubmit={handleLogin}>
+                            <TextField
+                                fullWidth
+                                label="Email"
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                                margin="normal"
+                            />
+                            <TextField
+                                fullWidth
+                                label="Password"
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                                margin="normal"
+                            />
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                sx={{ mt: 2 }}
+                            >
+                                Login
+                            </Button>
+                            {error && (
+                                <Alert severity="error" sx={{ mt: 2 }}>
+                                    {error}
+                                </Alert>
+                            )}
+                        </form>
+                    </>
+                )}
+            </Paper>
+        </Box>
+    );
+};
 
 export default AdminLogin;
