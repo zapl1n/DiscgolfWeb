@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import { Card, CardContent, Typography, Box, Grid, Button } from '@mui/material';
+import { set } from 'mongoose';
 
 
 
@@ -7,7 +8,7 @@ const AllPosts = ({searchQuery}) => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+const [selectedPostType, setSelectedPostType] = useState('all');
 
 // Lae kõik postitused
   useEffect(() => {
@@ -38,15 +39,20 @@ const AllPosts = ({searchQuery}) => {
     const name = post.name.toLowerCase();
     const location = post.location ? post.location.county.toLowerCase() : '';
     const course = post.course ? post.course.course.toLowerCase() : '';
+    const matchesSearch = name.includes(searchQuery.toLowerCase()) ||
+    location.includes(searchQuery.toLowerCase()) ||
+    course.includes(searchQuery.toLowerCase());
+
+  // Kui postType on 'all', siis kuvame kõik postitused, kui 'lost' või 'found', siis vastavalt filtrile
+  const matchesPostType = selectedPostType === 'all' || post.postType === selectedPostType;
+
+  return matchesSearch && matchesPostType; // Tagastame postituse, kui see vastab mõlemale filtrile
     
 
-    return (
-      name.includes(searchQuery.toLowerCase()) ||
-      location.includes(searchQuery.toLowerCase()) ||
-      course.includes(searchQuery.toLowerCase())
-    );
+   
   });
- 
+
+  
   if (loading) {
     return <Typography variant="h6" color="textSecondary">Loading...</Typography>;
   }
@@ -60,6 +66,12 @@ const AllPosts = ({searchQuery}) => {
       
       <Typography variant="h4" gutterBottom>Postitused</Typography>
 
+      {/* Navigeerimise nupud */}
+      <Box>
+  <Button onClick={() => setSelectedPostType('all')}>Kõik</Button>
+  <Button onClick={() => setSelectedPostType('lost')}>Kaotatud</Button>
+  <Button onClick={() => setSelectedPostType('found')}>Leitud</Button>
+</Box>
       {filteredPosts.length === 0 ? (
         <Typography>No accepted posts available.</Typography>
       ) : (
