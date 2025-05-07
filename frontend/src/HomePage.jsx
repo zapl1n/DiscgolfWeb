@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { Box, Card, CardContent, Typography, TextField, Button, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 const HomePage = () => {
     const [isFormVisible, setIsFormVisible] = useState(false);
@@ -18,6 +20,7 @@ const HomePage = () => {
     const [image, setImage] = useState(null);
     const [counties, setCounties] = useState([]);
     const [courses, setCourses] = useState([]);
+    const [OpenSnackbar, setOpenSnackbar] = useState(false);
 
     // Formi ref määramine
     const formRef = useRef(null);
@@ -126,11 +129,11 @@ const HomePage = () => {
 
             const data = await response.json();
             console.log('Post created:', data);
-            setConfirmation('Postitus on edukalt loodud!');
+            setOpenSnackbar(true);
             setTimeout(() => {
-                setConfirmation('');
-            }, 3000);
-            handleHideForm();
+                setOpenSnackbar(false);
+                handleHideForm();
+            }, 2000);
         } catch (error) {
             console.error('Error creating post:', error);
         }
@@ -337,6 +340,16 @@ const HomePage = () => {
                                                 Sulge
                                             </Button>
                                         </Box>
+                                        <Snackbar
+                                            open={OpenSnackbar}
+                                            autoHideDuration={2000}
+                                            onClose={() => setOpenSnackbar(false)}
+                                            anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                                            >
+  <Alert onClose={() => setOpenSnackbar(false)} severity="success" sx={{ width: '100%' }}>
+    Postitus on edukalt loodud!
+  </Alert>
+</Snackbar>
                                     </form>
                                 </CardContent>
                             </Card>

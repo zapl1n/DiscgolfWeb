@@ -67,10 +67,33 @@ const [selectedPostType, setSelectedPostType] = useState('all');
       <Typography variant="h4" gutterBottom>Postitused</Typography>
 
       {/* Navigeerimise nupud */}
-      <Box>
-  <Button onClick={() => setSelectedPostType('all')}>Kõik</Button>
-  <Button onClick={() => setSelectedPostType('lost')}>Kaotatud</Button>
-  <Button onClick={() => setSelectedPostType('found')}>Leitud</Button>
+      <Box sx={{ marginBottom: 2 }}>
+  <Button onClick={() => setSelectedPostType('all')} sx={{
+      marginRight: 2,
+      backgroundColor: '#646cff',
+      color: 'white',
+      '&:hover': {
+        backgroundColor: '#3f51b5',
+      },
+    }}>Kõik</Button>
+  <Button onClick={() => setSelectedPostType('lost')}
+    sx={{
+      marginRight: 2,
+      backgroundColor: '#646cff',
+      color: 'white',
+      '&:hover': {
+        backgroundColor: '#3f51b5',
+      },
+    }}>Kaotatud</Button>
+  <Button onClick={() => setSelectedPostType('found')}
+    sx={{
+      marginRight: 2,
+      backgroundColor: '#646cff',
+      color: 'white',
+      '&:hover': {
+        backgroundColor: '#3f51b5',
+      },
+    }}>Leitud</Button>
 </Box>
       {filteredPosts.length === 0 ? (
         <Typography>No accepted posts available.</Typography>

@@ -19,8 +19,6 @@ const AdminDashboard = () => {
         }
 
         
-
-          
         const fetchPosts = async () => {
             try {
                 const response = await fetch('http://localhost:8000/admin/posts', {
@@ -34,7 +32,7 @@ const AdminDashboard = () => {
                 }
 
                 const data = await response.json();
-                console.log('Fetched posts:', data); // Logige kogu API vastus
+               
 
                 // Veenduge, et andmed on õigesti saadud
                 if (data && Array.isArray(data)) { // Kontrollige, kas andmed on massiiv
@@ -49,9 +47,8 @@ const AdminDashboard = () => {
         };
 
         fetchPosts();
-    }, []); // Siin saame olla kindlad, et see töötab ainult kord, kui komponent esmakordselt laaditakse
+    }, []); 
 
-    console.log('Current posts state:', posts); // Logige, mis on hetkel posts massiiv
 
 
     const updatePostStatus = async (postId, status) => {
