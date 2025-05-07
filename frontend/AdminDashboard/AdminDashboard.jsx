@@ -1,7 +1,13 @@
+
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+
 const AdminDashboard = () => {
+    const [showAccepPopup, setShowAcceptPopup] = useState(false);
+    const [showRejectPopup, setShowRejectPopup] = useState(false);
+    const [rejectReason, setRejectReason] = useState('');
+    const [rejectingPostId, setRejectingPostId] = useState(null);
     const [posts, setPosts] = useState([]);
     const navigate = useNavigate();
 
@@ -12,6 +18,9 @@ const AdminDashboard = () => {
             return;
         }
 
+        
+
+          
         const fetchPosts = async () => {
             try {
                 const response = await fetch('http://localhost:8000/admin/posts', {
@@ -44,6 +53,61 @@ const AdminDashboard = () => {
 
     console.log('Current posts state:', posts); // Logige, mis on hetkel posts massiiv
 
+
+    const updatePostStatus = async (postId, status) => {
+        try {
+            const response = await fetch(`http://localhost:8000/admin/posts/${postId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                },
+                body: JSON.stringify({status}),
+            });
+          
+            if (!response.ok) {
+                throw new Error('Failed to update post status');
+            }
+            const updatedPost = await response.json();
+            
+            setPosts((prevPosts) => prevPosts.map((post) => (post._id === postId ? updatedPost : post)));
+        } catch (error) {
+            console.error('Error updating post status:', error);
+        }
+    }
+    
+    const handleAccept = (postId) => {
+        updatePostStatus(postId, 'accept');
+        setShowAcceptPopup(true);
+        setTimeout(() => {
+            setShowAcceptPopup(false);
+        }, 2000); // 2 sekundi pärast peidame pop-upi
+    };  
+
+    const handleReject = (postId) => {
+        setShowRejectPopup(true);
+        setRejectingPostId(postId);
+    };
+
+    const handleDelete = async (postId) => {
+        try {
+            const response = await fetch(`http://localhost:8000/admin/posts/${postId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                },
+            });
+            if (!response.ok) {
+                throw new Error('Failed to delete post');
+            }
+            setPosts((prevPosts) => prevPosts.filter((post) => post._id !== postId));
+        }
+        catch (error) {
+            console.error('Error deleting post:', error);
+        }
+    }
+      
+
     return (
         <div style={{ padding: "20px" }}>
     {posts.length === 0 ? (
@@ -70,8 +134,7 @@ const AdminDashboard = () => {
                     <h3>{post.name}</h3>
                     <p><strong>Created:</strong> {new Date(post.createdAt).toLocaleString()}</p>
                     <p><strong>Location:</strong> {post.location ? post.location.county : 'Not available'}</p>
-<p><strong>Course:</strong> {post.course ? post.course.course : 'Not available'}</p>
-
+                    <p><strong>Course:</strong> {post.course ? post.course.course : 'Not available'}</p>
                     <p><strong>Email:</strong> {post.email}</p>
                     <p><strong>Phone:</strong> {post.phone}</p>
                     <p><strong>Post Type:</strong> {post.postType}</p>
@@ -103,6 +166,8 @@ const AdminDashboard = () => {
                         >
                             Accept
                         </button>
+
+
                         <button 
                             style={{ padding: "6px 10px", backgroundColor: "#ff9800", color: "white", border: "none", borderRadius: "4px", cursor: "pointer" }}
                             onClick={() => handleReject(post._id)}

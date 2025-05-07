@@ -6,6 +6,7 @@ const Image = require("../models/ImageSchema");
 const { upload, resizeImage } = require("../middleware/upload");
 const fs = require("fs");
 const path = require("path");
+const { searchPosts } = require("../controllers/PostsSearch");
 
 router.post("/create", upload.array("imgFile",3), async (req, res) => {
   console.log("Received a POST request at /create");
@@ -49,7 +50,9 @@ router.post("/create", upload.array("imgFile",3), async (req, res) => {
     const newPost = new Post({
       name,
       location: countyData._id,
+      locationText: countyData.county,
       course: countyData._id,
+      courseText: countyData.course,
       images,
       email,
       phone,
@@ -92,7 +95,7 @@ router.get("/found", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const allPosts = await Post.find({status:"accepted"});
+    const allPosts = await Post.find({status:"accepted"}).populate('location').populate('course').populate('images');
     
     res.status(200).json(allPosts);    
   } catch (error) {
@@ -115,9 +118,7 @@ router.get("/county/:countyName", async (req, res) => {
   }
 });
 
-router.get("/test", (req, res) => {
-  res.send("Test töötab!");
-});
+router.get("/search", searchPosts)
 
 
 module.exports = router;

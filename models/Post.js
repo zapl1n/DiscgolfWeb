@@ -11,9 +11,17 @@ const PostSchema = new mongoose.Schema({
     ref: "Course",
     required: true,
   },
+  locationText:{
+    type: String,
+    required: true,
+  },
   course: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Course",
+    required: true,
+  },
+  courseText:{
+    type: String,
     required: true,
   },
   images: [{

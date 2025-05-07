@@ -21,7 +21,6 @@ const ImageSchema = new mongoose.Schema({
     updatedAt: {
         type: Date,
     },
-   
 });
 
 const Image = mongoose.model("Image", ImageSchema);

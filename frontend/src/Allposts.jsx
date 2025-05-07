@@ -5,6 +5,7 @@ const AllPosts = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   // Laadimine postitusi API-st
   useEffect(() => {
@@ -25,6 +26,7 @@ const AllPosts = () => {
 
     fetchPosts();
   }, []);
+  console.log('Posts:', posts);
 
   if (loading) {
     return <Typography variant="h6" color="textSecondary">Loading...</Typography>;
@@ -34,9 +36,10 @@ const AllPosts = () => {
     return <Typography variant="h6" color="error">Error: {error}</Typography>;
   }
 
+  
   return (
     <Box sx={{ padding: '20px' }}>
-      <Typography variant="h4" gutterBottom>Accepted Posts</Typography>
+      <Typography variant="h4" gutterBottom>Postitused</Typography>
 
       {posts.length === 0 ? (
         <Typography>No accepted posts available.</Typography>
@@ -44,28 +47,30 @@ const AllPosts = () => {
         <Grid container spacing={3}>
           {posts.map((post) => (
             <Grid item xs={12} sm={6} md={4} key={post._id}>
-              <Card sx={{ boxShadow: 3, borderRadius: '10px', overflow: 'hidden' }}>
+              <Card sx={{ boxShadow: 3, borderRadius: '10px', overflow: 'hidden', backgroundColor: 'white' }}>
                 <CardContent>
                   <Typography variant="h6" component="h2" gutterBottom>
-                    {post.name}
+                    {post.name.toUpperCase()}
                   </Typography>
                   <Typography variant="body2" color="textSecondary">
-                    <strong>Email:</strong> {post.email}
+                    <strong>Location:</strong> {post.location ? post.location.county : 'Not available'}
                   </Typography>
+                  <Typography variant="body2" color="textSecondary">
+                    <strong>Course:</strong> {post.course ? post.course.course : 'Not available'}
+                  </Typography>
+
                   <Typography variant="body2" color="textSecondary">
                     <strong>Phone:</strong> {post.phone}
                   </Typography>
                   <Typography variant="body2" color="textSecondary">
                     <strong>Post Type:</strong> {post.postType}
                   </Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    <strong>Created:</strong> {new Date(post.createdAt).toLocaleString()}
-                  </Typography>
+                 
 
                   {/* Kuvatakse pildid, kui need on olemas */}
                   {post.images && post.images.length > 0 && (
+                  
                     <Box sx={{ marginTop: 2 }}>
-                      <strong>Images:</strong>
                       <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
                         {post.images.map((img, index) => (
                           <img
@@ -74,22 +79,15 @@ const AllPosts = () => {
                             alt={`Post image ${index}`}
                             width={100}
                             style={{ borderRadius: '5px', objectFit: 'cover' }}
+                            
                           />
                         ))}
                       </Box>
                     </Box>
                   )}
+                  
 
-                  {/* Kui vaja, saab siin kuvada tegevuse nuppe (nt. "Accept", "Reject") */}
-                  <Box sx={{ marginTop: 2 }}>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      sx={{ marginRight: 1 }}
-                    >
-                      View Details
-                    </Button>
-                  </Box>
+                 
                 </CardContent>
               </Card>
             </Grid>
