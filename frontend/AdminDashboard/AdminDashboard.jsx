@@ -158,28 +158,51 @@ const AdminDashboard = () => {
                     )}
 
                     {/* Buttons */}
-                    <div style={{ marginTop: "15px", display: "flex", gap: "10px" }}>
-                        <button 
-                            style={{ padding: "6px 10px", backgroundColor: "#4caf50", color: "white", border: "none", borderRadius: "4px", cursor: "pointer" }}
-                            onClick={() => handleAccept(post._id)}
-                        >
-                            Accept
-                        </button>
+<div style={{ marginTop: "15px", display: "flex", gap: "10px" }}>
+    {/* Kui postituse staatuseks ei ole "accepted", siis kuvatakse "Accept" nupp */}
+    {post.status !== 'accepted' && (
+        <button
+            style={{
+                padding: "6px 10px",
+                backgroundColor: "#4caf50",
+                color: "white",
+                border: "none",
+                borderRadius: "4px",
+                cursor: "pointer",
+            }}
+            onClick={() => handleAccept(post._id)}
+        >
+            Accept
+        </button>
+    )}
 
-
-                        <button 
-                            style={{ padding: "6px 10px", backgroundColor: "#ff9800", color: "white", border: "none", borderRadius: "4px", cursor: "pointer" }}
-                            onClick={() => handleReject(post._id)}
-                        >
-                            Reject
-                        </button>
-                        <button 
-                            style={{ padding: "6px 10px", backgroundColor: "#f44336", color: "white", border: "none", borderRadius: "4px", cursor: "pointer" }}
-                            onClick={() => handleDelete(post._id)}
-                        >
-                            Delete
-                        </button>
-                    </div>
+    <button
+        style={{
+            padding: "6px 10px",
+            backgroundColor: "#ff9800",
+            color: "white",
+            border: "none",
+            borderRadius: "4px",
+            cursor: "pointer",
+        }}
+        onClick={() => handleReject(post._id)}
+    >
+        Reject
+    </button>
+    <button
+        style={{
+            padding: "6px 10px",
+            backgroundColor: "#f44336",
+            color: "white",
+            border: "none",
+            borderRadius: "4px",
+            cursor: "pointer",
+        }}
+        onClick={() => handleDelete(post._id)}
+    >
+        Delete
+    </button>
+</div>
                 </div>
             ))}
         </div>
