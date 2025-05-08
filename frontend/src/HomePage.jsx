@@ -301,7 +301,12 @@ const HomePage = () => {
                                             type="tel"
                                             name="phone"
                                             value={formData.phone}
-                                            onChange={handleInputChange}
+                                            onChange={(e) => {
+                                                const onlyNumbs = e.target.value.replace(/[^0-9]/g, '');
+                                                if (onlyNumbs.length <= 15) { // lubame max 15 numbrit
+                                                    handleInputChange({ target: { name: 'phone', value: onlyNumbs } });
+                                                  }
+                                            }}
                                             margin="normal"
                                             required
                                             sx={{ input: { color: '#aaa' }, label: { color: '#aaa' } }}
