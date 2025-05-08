@@ -65,7 +65,9 @@ const AdminDashboard = () => {
             if (!response.ok) {
                 throw new Error('Failed to update post status');
             }
-            const updatedPost = await response.json();
+
+            const data = await response.json();
+            const updatedPost = data.post
             
             setPosts((prevPosts) => prevPosts.map((post) => (post._id === postId ? updatedPost : post)));
         } catch (error) {

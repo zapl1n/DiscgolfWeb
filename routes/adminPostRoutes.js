@@ -62,7 +62,9 @@ router.put("/posts/:id", authMiddleware, adminMiddleware, async (req, res) => {
       req.params.id,
       { $set: updateFields },
       { new: true, runValidators: false } // Oluline, uuendame ainult staatust
-    );
+    ).populate('images')
+    .populate('course')
+    .populate('location');
     
     if (!updatedPost) {
       return res.status(404).json({ message: "Post not found" });
