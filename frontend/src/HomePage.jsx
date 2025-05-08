@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Box, Card, CardContent, Typography, TextField, Button, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { Box, Card, CardContent, Typography, TextField, Button, FormControl, InputLabel, Select, MenuItem, FormHelperText, FormControlLabel, Checkbox } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import Snackbar from '@mui/material/Snackbar';
@@ -74,10 +74,10 @@ const HomePage = () => {
 
     // Vormi andmete muutmine
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
+        const { name, value, checked, type } = e.target;
         setFormData((prevData) => ({
             ...prevData,
-            [name]: value,
+            [name]: type === 'checkbox' ? checked : value,
         }));
     };
 
@@ -320,6 +320,23 @@ const HomePage = () => {
                                                 <MenuItem value="found">Leitud</MenuItem>
                                             </Select>
                                         </FormControl>
+                                        <FormControlLabel
+                                        control={
+                                            <Checkbox
+                                                checked={formData.privacyPolicy}
+                                                onChange={handleInputChange}
+                                                name="agreeToTerms"
+                                                color="primary"
+                                            />
+                                        }
+                                        label="Nõustun andmete töötlemisega vastavalt privaatsuspoliitikale"
+                                        required
+                                    />
+                                        <FormHelperText>
+                                            <a href="/privacy-policy" style={{ color: '#aaa' }}>
+                                              Loe meie privaatsuspoliitikat
+                                              </a>
+                                        </FormHelperText>
 
                                         <Box mt={3} display="flex" justifyContent="space-between" gap={2}>
                                             <Button type="submit" variant="contained" color="#fff" sx={{
