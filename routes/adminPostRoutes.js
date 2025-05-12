@@ -54,10 +54,17 @@ router.put("/posts/:id", authMiddleware, adminMiddleware, async (req, res) => {
     if (req.body.status === 'accept') {
       updateFields.status = "accepted";
     } else if (req.body.status === 'reject') {
+      const rejectReason = req.body.reason || '';
+      if(!rejectReason){
+        return res.status(400).json({ message: "Reason is required for rejection" });
+      }
       updateFields.status = "rejected";
+      updateFields.rejectReason = rejectReason;
+      
     } else {
       return res.status(400).json({ message: "Invalid action" });
     }
+  
     // Otsime postituse ID järgi ja uuendame selle staatust
     const updatedPost = await Post.findByIdAndUpdate(
       req.params.id,
@@ -71,7 +78,7 @@ router.put("/posts/:id", authMiddleware, adminMiddleware, async (req, res) => {
       return res.status(404).json({ message: "Post not found" });
     }
     // Kui postitus on edukalt uuendatud, saadame kliendile e-kirja
-    await notifyClient(updatedPost);
+    await notifyClient(updatedPost,req.body.reason);
 
     res.status(200).json({ message: "Post updated successfully", post: updatedPost });
   } catch (error) {

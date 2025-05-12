@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import PostCard from './PostCard'; // Importige PostCard
+import PostCard from './PostCard';
 import {
   Box,
   Accordion,
@@ -15,8 +15,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 const AdminDashboard = () => {
   const [pendingPosts, setPendingPosts] = useState([]);
   const [acceptedPosts, setAcceptedPosts] = useState([]);
-  const [showPending, setShowPending] = useState(false); // State Pending postituste kuvamiseks
-  const [showAccepted, setShowAccepted] = useState(false); // State Accepted postituste kuvamiseks
+  
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -54,7 +53,7 @@ const AdminDashboard = () => {
     fetchPosts();
   }, []); 
 
-  const updatePostStatus = async (postId, action) => {
+  const updatePostStatus = async (postId, action, reason = "") => {
     try {
       const response = await fetch(`http://localhost:8000/admin/posts/${postId}`, {
         method: 'PUT',
@@ -62,7 +61,7 @@ const AdminDashboard = () => {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
         },
-        body: JSON.stringify({ status:action }),
+        body: JSON.stringify({ status:action, reason }),
       });
 
       if (!response.ok) {
@@ -90,7 +89,13 @@ const AdminDashboard = () => {
   };
 
   const handleReject = (postId) => {
-    updatePostStatus(postId, 'reject');
+    const reason = prompt('Palun sisestage tagasilükkimise põhjus:');
+    if (!reason || reason.trim() === '') {
+      alert('Tagasilükkimise põhjus on nõutud.');
+      return;
+    }
+    updatePostStatus(postId, 'reject', reason);
+   
   };
 
   const handleDelete = async (postId) => {

@@ -96,7 +96,7 @@ const [selectedPostType, setSelectedPostType] = useState('all');
     }}>Leitud</Button>
 </Box>
       {filteredPosts.length === 0 ? (
-        <Typography>No accepted posts available.</Typography>
+        <Typography></Typography>
       ) : (
         <Grid container spacing={3}>
           {filteredPosts.map((post) => (
