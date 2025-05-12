@@ -21,6 +21,8 @@ const HomePage = () => {
     const [counties, setCounties] = useState([]);
     const [courses, setCourses] = useState([]);
     const [OpenSnackbar, setOpenSnackbar] = useState(false);
+    const [errors, setErrors] = useState({})
+    
 
     // Formi ref määramine
     const formRef = useRef(null);
@@ -80,6 +82,8 @@ const HomePage = () => {
             [name]: type === 'checkbox' ? checked : value,
         }));
     };
+
+    
 
     // Pildi üleslaadimise funktsioon
     const handleImageUpload = (e) => {
@@ -303,12 +307,22 @@ const HomePage = () => {
                                             value={formData.phone}
                                             onChange={(e) => {
                                                 const onlyNumbs = e.target.value.replace(/[^0-9]/g, '');
-                                                if (onlyNumbs.length <= 15) { // lubame max 15 numbrit
+                                                if (onlyNumbs.length <= 8) { 
                                                     handleInputChange({ target: { name: 'phone', value: onlyNumbs } });
-                                                  }
+
+
+                                                    if (!/^5\d{6,7}$/.test(onlyNumbs)) {
+                                                        setErrors(prev => ({ ...prev, phone: "Sisesta kehtiv Eesti telefoninumber" }));
+                                                      } else {
+                                                        setErrors(prev => ({ ...prev, phone: "" }));
+                                                      }
+                                                    }
                                             }}
+                                            
                                             margin="normal"
                                             required
+                                            error={!!errors.phone}
+                                            helperText={errors.phone}
                                             sx={{ input: { color: '#aaa' }, label: { color: '#aaa' } }}
                                         />
 

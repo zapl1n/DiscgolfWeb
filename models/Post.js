@@ -39,6 +39,10 @@ const PostSchema = new mongoose.Schema({
   phone: {
     type: String,
     required: true,
+    match: [
+      /^5\d{6,7}$/, 'Sisesta kehtiv Eesti telefoninumber'
+
+    ]
   },
   status: {
     type: String,

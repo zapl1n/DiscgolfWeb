@@ -54,7 +54,7 @@ const AdminDashboard = () => {
     fetchPosts();
   }, []); 
 
-  const updatePostStatus = async (postId, status) => {
+  const updatePostStatus = async (postId, action) => {
     try {
       const response = await fetch(`http://localhost:8000/admin/posts/${postId}`, {
         method: 'PUT',
@@ -62,7 +62,7 @@ const AdminDashboard = () => {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
         },
-        body: JSON.stringify({ status }),
+        body: JSON.stringify({ status:action }),
       });
 
       if (!response.ok) {
@@ -71,9 +71,10 @@ const AdminDashboard = () => {
 
       const data = await response.json();
       const updatedPost = data.post;
+      
 
       // Uuenda postitusi pärast staatuse muutmist
-      if (status === 'accepted') {
+      if (action === 'accept') {
         setPendingPosts(prev => prev.filter(post => post._id !== postId));
         setAcceptedPosts(prev => [...prev, updatedPost]);
       } else {
@@ -85,11 +86,11 @@ const AdminDashboard = () => {
   };
 
   const handleAccept = (postId) => {
-    updatePostStatus(postId, 'accepted');
+    updatePostStatus(postId, 'accept');
   };
 
   const handleReject = (postId) => {
-    updatePostStatus(postId, 'rejected');
+    updatePostStatus(postId, 'reject');
   };
 
   const handleDelete = async (postId) => {

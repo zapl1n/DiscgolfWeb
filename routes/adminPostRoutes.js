@@ -13,6 +13,7 @@ router.get("/posts", authMiddleware, adminMiddleware, async (req, res) => {
     .populate('images')
     .populate('course')
     .populate('location')
+    console.log("All posts:", allPosts)
     
     res.status(200).json(allPosts);
   } catch (error) {
