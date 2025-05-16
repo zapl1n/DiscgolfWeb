@@ -80,6 +80,11 @@ router.put("/posts/:id", authMiddleware, adminMiddleware, async (req, res) => {
     // Kui postitus on edukalt uuendatud, saadame kliendile e-kirja
     await notifyClient(updatedPost,req.body.reason);
 
+    if (updatedPost.status === "rejected") {
+      await Post.findByIdAndDelete(req.params.id);
+      return res.status(200).json({ message: "Post rejected and deleted successfully" });
+    }
+
     res.status(200).json({ message: "Post updated successfully", post: updatedPost });
   } catch (error) {
     console.error('Error updating post:', error);
