@@ -1,26 +1,61 @@
 
+import { Container, Typography, Box } from '@mui/material';
 
 const PrivacyPolicy = () => {
-    return (
-        <div style={{ padding: '20px', maxWidth: '800px', margin: 'auto' }}>
-      <h1>Privaatsuspoliitika</h1>
-      <p>Viimati uuendatud: Mai 2025</p>
+  return (
+    <Container maxWidth="md" sx={{ py: 5 }}>
+      <Typography variant="h4" component="h1" gutterBottom>
+        Privaatsuspoliitika
+      </Typography>
+      <Typography variant="body2" gutterBottom>
+        Viimati uuendatud: Mai 2025
+      </Typography>
 
-      <h2>1. Kogutavad andmed</h2>
-      <p>Me kogume järgmisi isikuandmeid: e-posti aadress, telefoninumber, mis on vajalikud kaotatud või leitud ketaste info esitamiseks.</p>
+      <Box my={4}>
+        <Typography variant="h6" gutterBottom>
+          1. Kogutavad andmed
+        </Typography>
+        <Typography>
+          Me kogume järgmisi isikuandmeid: e-posti aadress, telefoninumber, mis on vajalikud kaotatud või leitud ketaste info esitamiseks.
+        </Typography>
+      </Box>
 
-      <h2>2. Kuidas andmeid kasutatakse</h2>
-      <p>Teie isikuandmeid kasutatakse ainult selleks, et kuvada Teie postitust ja võimaldada inimestel Teiega ühendust võtta.</p>
+      <Box my={4}>
+        <Typography variant="h6" gutterBottom>
+          2. Kuidas andmeid kasutatakse
+        </Typography>
+        <Typography>
+          Teie isikuandmeid kasutatakse ainult selleks, et kuvada Teie postitust ja võimaldada inimestel Teiega ühendust võtta.
+        </Typography>
+      </Box>
 
-      <h2>3. Andmete jagamine</h2>
-      <p>Me ei jaga Teie andmeid kolmandate osapooltega ilma Teie selge nõusolekuta.</p>
+      <Box my={4}>
+        <Typography variant="h6" gutterBottom>
+          3. Andmete jagamine
+        </Typography>
+        <Typography>
+          Me ei jaga Teie andmeid kolmandate osapooltega ilma Teie selge nõusolekuta.
+        </Typography>
+      </Box>
 
-      <h2>4. Andmete turvalisus</h2>
-      <p>Andmeid hoitakse turvalises keskkonnas ja neid töödeldakse ainult vastavalt seadustele.</p>
+      <Box my={4}>
+        <Typography variant="h6" gutterBottom>
+          4. Andmete turvalisus
+        </Typography>
+        <Typography>
+          Andmeid hoitakse turvalises keskkonnas ja neid töödeldakse ainult vastavalt seadustele.
+        </Typography>
+      </Box>
 
-      <h2>5. Teie õigused</h2>
-      <p>Teil on õigus küsida oma andmete kohta, neid parandada või kustutada. Selleks võtke meiega ühendust.</p>
-    </div>
+      <Box my={4}>
+        <Typography variant="h6" gutterBottom>
+          5. Teie õigused
+        </Typography>
+        <Typography>
+          Teil on õigus küsida oma andmete kohta, neid parandada või kustutada. Selleks võtke meiega ühendust.
+        </Typography>
+      </Box>
+    </Container>
   );
 };
 
