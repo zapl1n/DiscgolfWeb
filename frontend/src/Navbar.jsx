@@ -4,6 +4,7 @@ import { AppBar, Toolbar, Typography, Box, Button, TextField, InputAdornment, Ic
 import SearchIcon from '@mui/icons-material/Search';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useState } from 'react';
+import logo from './assets/logol6pu.png'
 
 
 function Navbar({onSearch}) {
@@ -26,7 +27,7 @@ function Navbar({onSearch}) {
     <AppBar position="static" elevation={0} sx={{ backgroundColor: 'transparent' }}>
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Typography variant="h6" component="div">
-          Siia läheb kunagi logo
+          <img src={logo} alt="Logo" style={{ height: '40px', paddingTop:'30px',paddingLeft:'10px' }} />
         </Typography>
 
         {/* Ainult /postitused lehel näita otsingut */}
@@ -34,23 +35,25 @@ function Navbar({onSearch}) {
           <Box sx={{ flexGrow: 1, maxWidth: 200 }}>
             <TextField
               sx={{
-                backgroundColor: '#646cff',
-                borderRadius: 2,
-                marginLeft: 2,
-                '& .MuiOutlinedInput-root': {
-                  '&.Mui-focused fieldset': {
-                    borderColor: 'transparent',
-                    boxShadow: 'none',
-                  },
-                  '&.Mui-focused': {
-                    boxShadow: 'none',
-                    outline: 'none',
-                  },
-                },
-                '& input': {
-                  outline: 'none !important',
-                },
-              }}
+  backgroundColor: 'transparent',
+  borderRadius: 2,
+  marginLeft: 2,
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: '#646cff', 
+    },
+    '&:hover fieldset': {
+      borderColor: '#646cff', 
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: '#646cff', 
+    },
+  },
+  '& input': {
+    color: 'white',
+    outline: 'none !important',
+  },
+}}
               fullWidth
               size="small"
               variant="outlined"
@@ -66,6 +69,10 @@ function Navbar({onSearch}) {
         )}
 
         <Box>
+          {/* Avalehe nupp on alati nähtav */}
+          <Button color="inherit" component={Link} to="/">
+            Avaleht
+          </Button>
           {token ? (
             <Button color="inherit" onClick={handleLogout}>
               Logout

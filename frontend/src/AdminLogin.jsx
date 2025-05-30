@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Box, Paper, Typography, TextField, Button, Alert, Stack } from '@mui/material'
@@ -29,54 +28,63 @@ const AdminLogin = () => {
                 },
                 body: JSON.stringify({ email, password })
             })
-           
-            if(!response.ok) {
+
+            if (!response.ok) {
                 throw new Error('Login failed')
             }
 
             const data = await response.json()
-            console.log('Login successful:', data)
-
             localStorage.setItem('token', data.token)
             setIsLoggedIn(true)
-
             navigate('/admin')
 
-        
         } catch (error) {
             setError(error.message)
             console.error('Error logging in:', error)
-            
         }
-        }
+    }
+
     const handleLogout = () => {
         localStorage.removeItem('token')
         setIsLoggedIn(false)
     }
 
-  return (
-    <Box
+    return (
+        <Box
             display="flex"
             justifyContent="center"
             alignItems="center"
             height="100vh"
-            bgcolor="transparent"
+            bgcolor="#121212"
         >
-            <Paper elevation={3} sx={{ padding: 4, width: '100%', maxWidth: 400, }    }>
+            <Paper
+                elevation={5}
+                sx={{
+                    padding: 4,
+                    width: '100%',
+                    maxWidth: 400,
+                    backgroundColor: '#1e1e1e',
+                    color: '#fff',
+                    borderRadius: 3,
+                }}
+            >
                 {isLoggedIn ? (
                     <Stack spacing={2} alignItems="center">
-                        <Typography variant="h5">Welcome, Admin!</Typography>
+                        <Typography variant="h5" color="white">
+                            Welcome, Admin!
+                        </Typography>
                         <Button
                             variant="contained"
                             color="secondary"
                             onClick={handleLogout}
+                            sx={{ textTransform: 'none' }}
                         >
                             Logout
                         </Button>
                     </Stack>
                 ) : (
                     <>
-                        <Typography variant="h5" gutterBottom align="center">
+                        <Typography variant="h5" align="center" gutterBottom color="white">
                             Admin Login
                         </Typography>
                         <form onSubmit={handleLogin}>
@@ -88,6 +96,23 @@ const AdminLogin = () => {
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
                                 margin="normal"
+                                InputLabelProps={{ style: { color: '#bbb' } }}
+                                InputProps={{
+                                    style: { color: '#fff' },
+                                }}
+                                sx={{
+                                    '& .MuiOutlinedInput-root': {
+                                        '& fieldset': {
+                                            borderColor: '#555',
+                                        },
+                                        '&:hover fieldset': {
+                                            borderColor: '#888',
+                                        },
+                                        '&.Mui-focused fieldset': {
+                                            borderColor: '#bbb',
+                                        },
+                                    },
+                                }}
                             />
                             <TextField
                                 fullWidth
@@ -97,12 +122,37 @@ const AdminLogin = () => {
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
                                 margin="normal"
+                                InputLabelProps={{ style: { color: '#bbb' } }}
+                                InputProps={{
+                                    style: { color: '#fff' },
+                                }}
+                                sx={{
+                                    '& .MuiOutlinedInput-root': {
+                                        '& fieldset': {
+                                            borderColor: '#555',
+                                        },
+                                        '&:hover fieldset': {
+                                            borderColor: '#888',
+                                        },
+                                        '&.Mui-focused fieldset': {
+                                            borderColor: '#bbb',
+                                        },
+                                    },
+                                }}
                             />
                             <Button
                                 type="submit"
                                 fullWidth
                                 variant="contained"
-                                sx={{ mt: 2 }}
+                                sx={{
+                                    mt: 2,
+                                    backgroundColor: '#333',
+                                    color: '#fff',
+                                    '&:hover': {
+                                        backgroundColor: '#444',
+                                    },
+                                    textTransform: 'none',
+                                }}
                             >
                                 Login
                             </Button>
@@ -116,7 +166,7 @@ const AdminLogin = () => {
                 )}
             </Paper>
         </Box>
-    );
-};
+    )
+}
 
-export default AdminLogin;
+export default AdminLogin

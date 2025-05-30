@@ -107,17 +107,15 @@ const [selectedPostType, setSelectedPostType] = useState('all');
                     {post.name.toUpperCase()}
                   </Typography>
                   <Typography variant="body2" color="textSecondary">
-                    <strong>Location:</strong> {post.location ? post.location.county : 'Not available'}
+                    <strong>Asukoht:</strong> {post.location ? post.location.county : 'Not available'}
                   </Typography>
                   <Typography variant="body2" color="textSecondary">
-                    <strong>Course:</strong> {post.course ? post.course.course : 'Not available'}
+                    <strong>Rada:</strong> {post.course ? post.course.course : 'Not available'}
                   </Typography>
                   <Typography variant="body2" color="textSecondary">
-                    <strong>Phone:</strong> {post.phone}
+                    <strong>Telefoni nr:</strong> {post.phone}
                   </Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    <strong>Post Type:</strong> {post.postType}
-                  </Typography>
+                 
                    {/* Kuvatakse postituse pildid, kui need olemas */}
                 {post.images && post.images.length > 0 && (
                   <Box sx={{ marginTop: 2 }}>

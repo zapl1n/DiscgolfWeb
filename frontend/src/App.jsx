@@ -12,6 +12,7 @@ import PrivacyPolicy from './PrivacyPolicy'
 
 
 
+
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -23,6 +24,7 @@ function App() {
      
       <>
 
+      
       <Navbar onSearch={setSearchQuery} />
         <Routes>
           <Route exact path="/" element={<HomePage />} />

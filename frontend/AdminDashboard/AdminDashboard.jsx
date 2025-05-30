@@ -90,6 +90,10 @@ const AdminDashboard = () => {
 
   const handleReject = (postId) => {
     const reason = prompt('Palun sisestage tagasilükkimise põhjus:');
+
+    if (reason === null){
+      return
+    }
     if (!reason || reason.trim() === '') {
       alert('Tagasilükkimise põhjus on nõutud.');
       return;

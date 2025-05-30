@@ -7,9 +7,9 @@ const notifyClient = require("../services/emailHelper"); // Importime notifyClie
 // Kuvame adminile kõik postitused
 router.get("/posts", authMiddleware, adminMiddleware, async (req, res) => {
   try {
-    // Otsime kõik postitused andmebaasist
+    
     const allPosts = await Post.find()
-    // Kasutame populate meetodit, et täita seotud andmed
+    
     .populate('images')
     .populate('course')
     .populate('location')
@@ -48,9 +48,9 @@ router.get("/posts/accepted", authMiddleware, adminMiddleware, async (req, res) 
 // Kasutame authMiddleware ja adminMiddleware, et veenduda, et ainult administraatorid saavad postitusi redigeerida
 router.put("/posts/:id", authMiddleware, adminMiddleware, async (req, res) => {
   try {
-    // Loome objekti, kuhu salvestame staatuse uuendamise
+
     const updateFields = {};
-    // Kui postituse staatust muudetakse, siis uuendame staatust
+    
     if (req.body.status === 'accept') {
       updateFields.status = "accepted";
     } else if (req.body.status === 'reject') {
@@ -94,25 +94,24 @@ router.put("/posts/:id", authMiddleware, adminMiddleware, async (req, res) => {
 
 // Kasutame authMiddleware ja adminMiddleware, et veenduda, et ainult administraatorid saavad postitusi kustutada
 router.delete("/posts/:id", authMiddleware, adminMiddleware, async (req, res) => {
-  // Kustutame postituse ID järgi
+  
   try {
-    // Otsime postituse ID järgi
+    
     const postId = req.params.id;
     const post = await Post.findById(postId);
-    // Kui postitust ei leita, tagastame 404 vea
+    
     if (!post) {
       return res.status(404).json({ message: "Post not found" });
     }
     
-    // Kasutame findByIdAndDelete meetodit, et leida ja kustutada postitus
     await Post.findByIdAndDelete(postId)
-    // Kui postitus on edukalt kustutatud, tagastame 200 staatuse ja sõnumi
+    
     res.status(200).json({ message: "Post deleted successfully" });
 
   } catch (error) {
-    // Kui tekib viga, logime vea konsooli
+   
     console.error("Error deleting post:", error);
-    // Tagastame 500 vea, kui tekib viga
+    
     res.status(500).json({ message: "Internal server error" });
   }
 });

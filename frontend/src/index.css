@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family:'Inter', sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -19,7 +22,7 @@ a {
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #646cff;
 }
 
 *{
@@ -35,10 +38,22 @@ body {
   font-family: sans-serif;
   color: white;
 
-  background: linear-gradient(270deg, #1f1028, #1a1a1a, #242424, #1c0f31);
+  background: rgb(18, 17, 17);
   background-size: 600% 600%;
   animation: gradientFlow 60s ease infinite;
 }
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.01'/%3E%3C/svg%3E");
+  z-index: 1;
+}
+
 
 @keyframes gradientFlow {
   0% {
@@ -51,6 +66,9 @@ body {
     background-position: 0% 30%;
   }
 }
+
+
+
 
 
 h1 {

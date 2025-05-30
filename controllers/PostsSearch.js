@@ -1,5 +1,4 @@
-const { query } = require("express");
-const Post = require("../models/Post");
+
 const post = require("../models/Post");
 
 const searchPosts = async (req, res) => {

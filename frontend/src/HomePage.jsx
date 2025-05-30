@@ -121,7 +121,7 @@ const HomePage = () => {
         console.log("Sending data to: http://localhost:8000/posts/create");
 
         try {
-            const response = await fetch('http://localhost:8000/posts/create',  {
+            const response = await fetch('http://localhost:8000/posts',  {
               method: 'POST',
               body: form,
             });
@@ -160,7 +160,7 @@ const HomePage = () => {
                 <Typography variant="h1" sx={{
                     fontSize: '4rem',
                     fontWeight: 'bold',
-                    background: 'linear-gradient(to right, #592cc4,rgb(132, 90, 249))',
+                    background: '#646cff',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     marginTop: '10rem',
@@ -184,11 +184,12 @@ const HomePage = () => {
                                     fontSize: '1.2rem',
                                     padding: '15px 30px',
                                     borderRadius: '12px',
-                                    background: 'linear-gradient(to right, #6a71f2,rgb(107, 63, 228))',
+                                    background: '#646cff',
                                     color: '#fff',
+        
                                     textTransform: 'none',
                                     '&:hover': {
-                                        background: 'linear-gradient(to right,rgb(104, 42, 197),rgb(104, 42, 197))',
+                                        background: 'linear-gradient(to right,rgb(18, 18, 18),rgb(26, 26, 26))',
                                     },
                                 }}>
                                 Lisa uus postitus
@@ -284,6 +285,11 @@ const HomePage = () => {
                                                         Lae pilt
                                                     </Button>
                                                 </label>
+                                                {image && (
+                                                    <Typography variant="body2" sx={{ mt: 2, color: '#aaa' }}>
+                                                        Valitud fail: {image.name}
+                                                    </Typography>
+                                                )}
                                             </Box>
                                         </FormControl>
 

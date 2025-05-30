@@ -8,8 +8,8 @@ const fs = require("fs");
 const path = require("path");
 const { searchPosts } = require("../controllers/PostsSearch");
 
-router.post("/create", upload.array("imgFile",3), async (req, res) => {
-  console.log("Received a POST request at /create");
+router.post("/", upload.array("imgFile",3), async (req, res) => {
+  
   try {
 
     const images = []
